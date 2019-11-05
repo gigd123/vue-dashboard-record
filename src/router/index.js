@@ -2,7 +2,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 自訂的分頁元件
-import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/pages/Login'
 import Dashboard from '@/components/Dashboard'
 import Products from '@/components/pages/Products'
@@ -18,12 +17,12 @@ export default new VueRouter({
       path: '*',
       redirect: 'Login'
     },
-    {
-      name: 'HelloWorld',
-      path: '/',
-      component: HelloWorld,
-      meta: { requiresAuth: true }
-    },
+    // {
+    //   name: 'HelloWorld',
+    //   path: '/',
+    //   component: HelloWorld,
+    //   meta: { requiresAuth: true }
+    // },
     {
       name: 'Login', // 元件呈現的名稱
       path: '/Login', // 對應的虛擬路徑

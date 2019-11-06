@@ -7,15 +7,7 @@
 <script>
 
 export default {
-  name: 'App',
-  created () {
-    // api server path + remote path
-    const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`
-    console.log(process.env.APIPATH, process.env.CUSTOMPATH)
-    this.$http.get(api).then((response) => {
-      console.log(response.data)
-    })
-  }
+  name: 'App'
 }
 </script>
 

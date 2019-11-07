@@ -9,6 +9,7 @@ import 'bootstrap'
 
 import router from './router'
 import App from './App'
+import './bus'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)

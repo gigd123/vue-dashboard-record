@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 import 'bootstrap'
 
 import router from './router'
@@ -13,6 +15,9 @@ Vue.use(VueAxios, axios)
 
 // withCredentials 會自動將 cookie 存在前端，每次發送 api 也會往後端送
 axios.defaults.withCredentials = true
+
+// 全域啟用該元件，不必在其他 component 再度載入
+Vue.component('Loading', Loading)
 
 /* eslint-disable no-new */
 new Vue({

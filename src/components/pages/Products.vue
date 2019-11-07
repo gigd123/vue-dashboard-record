@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-primary"
         @click="openModal(true)">
@@ -11,7 +13,7 @@
             <th width="120">原價</th>
             <th width="120">售價</th>
             <th width="80">是否啟用</th>
-            <th width="80">編輯</th>
+            <th width="130">編輯</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +32,7 @@
             </td>
             <td>
               <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
+              <button class="btn btn-outline-danger btn-sm" @click="openModalDelete(item)">刪除</button>
             </td>
           </tr>
         </tbody>
@@ -58,10 +61,10 @@
                   </div>
                   <div class="form-group">
                     <label for="customFile">或 上傳圖片
-                      <i class="fas fa-spinner fa-spin"></i>
+                      <i class="fas fa-spinner fa-spin" v-if="status.fileUploading"></i>
                     </label>
                     <input type="file" id="customFile" class="form-control"
-                      ref="files">
+                      ref="files" @change="uploadFile()">
                   </div>
                   <img img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
                     class="img-fluid" :src="tempProduct.imageUrl" alt="">
@@ -155,14 +158,15 @@
               是否刪除 <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger"
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" @click="cancelDelete()">取消</button>
+              <button type="button" class="btn btn-danger" @click="deleteProduct()"
                 >確認刪除</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -173,14 +177,20 @@ export default {
     return {
       products: [],
       tempProduct: {},
-      isNew: false
+      isNew: false,
+      isLoading: false,
+      status: {
+        fileUploading: false
+      }
     }
   },
   methods: {
     getProducts () {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products`
       const vm = this
+      vm.isLoading = true
       this.$http.get(api).then((response) => {
+        vm.isLoading = false
         vm.products = response.data.products
       })
     },
@@ -189,10 +199,14 @@ export default {
         this.tempProduct = {}
         this.isNew = true
       } else {
-        this.tempProduct = Object.assign({}, item)
+        this.tempProduct = {...item}
         this.isNew = false
       }
       $('#productModal').modal('show')
+    },
+    openModalDelete (item) {
+      this.tempProduct = item
+      $('#delProductModal').modal('show')
     },
     updateProduct () {
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/product`
@@ -204,7 +218,6 @@ export default {
       }
       // vm.tempProduct 的資料結構是物件， key 是 dat，必須包起來
       this.$http[httpMethod](api, {data: vm.tempProduct}).then((response) => {
-        console.log(response.data)
         if (response.data.success) {
           $('#productModal').modal('hide')
           vm.getProducts()
@@ -214,8 +227,39 @@ export default {
         // vm.products = response.data.products
       })
     },
+    uploadFile () {
+      const uploadedFile = this.$refs.files.files[0]
+      const vm = this
+      const formData = new FormData()
+      formData.append('file-to-upload', uploadedFile)
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/upload`
+      vm.status.fileUploading = true
+      this.$http.post(url, formData, {
+        // 將格式改成 formData 格式
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then((response) => {
+        console.log('response======', response.data)
+        vm.status.fileUploading = false
+        if (response.data.success) {
+          // vm.tempProduct.imageUrl = response.data.imageUrl
+          vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
+        }
+      })
+    },
     deleteProduct (item) {
-
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/product/${this.tempProduct.id}`
+      const vm = this
+      this.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          $('#delProductModal').modal('hide')
+          vm.getProducts()
+        }
+      })
+    },
+    cancelDelete () {
+      $('#delProductModal').modal('hide')
     }
   },
   created () {
@@ -223,3 +267,7 @@ export default {
   }
 }
 </script>
+
+<style>
+@import url("@fortawesome/fontawesome-free/css/all.css");
+</style>

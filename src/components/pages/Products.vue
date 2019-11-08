@@ -21,10 +21,10 @@
             <td>{{ item.category }}</td>
             <td>{{ item.title }}</td>
             <td class="text-right">
-              {{ item.origin_price }}
+              {{ item.origin_price | currency }}
             </td>
             <td class="text-right">
-              {{ item.price }}
+              {{ item.price | currency }}
             </td>
             <td>
               <span v-if="item.is_enabled" class="text-success">啟用</span>
@@ -37,6 +37,8 @@
           </tr>
         </tbody>
       </table>
+      <!-- Pagination -->
+      <Pagination :pagination="pagination" @switchPagination="getProducts"/>
       <!-- Modal -->
       <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -171,11 +173,16 @@
 
 <script>
 import $ from 'jquery'
+import Pagination from '../Pagination'
 
 export default {
+  components: {
+    Pagination
+  },
   data () {
     return {
       products: [],
+      pagination: {},
       tempProduct: {},
       isNew: false,
       isLoading: false,
@@ -185,13 +192,15 @@ export default {
     }
   },
   methods: {
-    getProducts () {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products`
+    getProducts (page = 1) {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`
       const vm = this
       vm.isLoading = true
       this.$http.get(api).then((response) => {
         vm.isLoading = false
         vm.products = response.data.products
+        vm.pagination = response.data.pagination
+        console.log('json.response=====', response)
       })
     },
     openModal (isNew, item) {

@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Login from '@/components/pages/Login'
 import Dashboard from '@/components/Dashboard'
 import Products from '@/components/pages/Products'
+import CustomerOrders from '@/components/pages/CustomerOrders'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -39,6 +40,18 @@ export default new VueRouter({
           name: 'Product',
           component: Products,
           meta: { requiresAuth: true }
+        }
+      ]
+    },
+    {
+      name: 'Dashboard',
+      path: '/',
+      component: Dashboard,
+      children: [
+        {
+          path: 'customer_orders',
+          name: 'CustomerOrders',
+          component: CustomerOrders
         }
       ]
     }

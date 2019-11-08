@@ -10,6 +10,7 @@ import 'bootstrap'
 import router from './router'
 import App from './App'
 import './bus'
+import currencyFilter from './filters/currency'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
@@ -19,6 +20,8 @@ axios.defaults.withCredentials = true
 
 // 全域啟用該元件，不必在其他 component 再度載入
 Vue.component('Loading', Loading)
+// 全域啟用
+Vue.filter('currency', currencyFilter)
 
 /* eslint-disable no-new */
 new Vue({

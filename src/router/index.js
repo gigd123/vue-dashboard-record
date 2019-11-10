@@ -6,6 +6,7 @@ import Login from '@/components/pages/Login'
 import Dashboard from '@/components/Dashboard'
 import Products from '@/components/pages/Products'
 import CustomerOrders from '@/components/pages/CustomerOrders'
+import Orders from '@/components/pages/Orders'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -40,6 +41,11 @@ export default new VueRouter({
           name: 'Product',
           component: Products,
           meta: { requiresAuth: true }
+        },
+        {
+          path: 'orders',
+          name: 'Orders',
+          component: Orders
         }
       ]
     },

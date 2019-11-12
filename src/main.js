@@ -6,6 +6,11 @@ import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import 'bootstrap'
+import { ValidationProvider, extend } from 'vee-validate'
+// 將驗證條件引入
+import * as rules from 'vee-validate/dist/rules'
+// 引入中文化的文件
+import tw from 'vee-validate/dist/locale/zh_TW'
 
 import router from './router'
 import App from './App'
@@ -22,6 +27,16 @@ axios.defaults.withCredentials = true
 Vue.component('Loading', Loading)
 // 全域啟用
 Vue.filter('currency', currencyFilter)
+
+// 將條件加入 extend
+for (let rule in rules) {
+  extend(rule, {
+    ...rules[rule], // add the rule
+    message: tw.messages[rule] // 把 message 加進去並中文化
+  })
+}
+// 全域啟用 ValidationProvider
+Vue.component('ValidationProvider', ValidationProvider)
 
 /* eslint-disable no-new */
 new Vue({

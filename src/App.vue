@@ -13,4 +13,5 @@ export default {
 
 <style lang="scss">
 @import "./assets/all";
+@import url("@fortawesome/fontawesome-free/css/all.css");
 </style>

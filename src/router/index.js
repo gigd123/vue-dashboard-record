@@ -6,7 +6,9 @@ import Login from '@/components/pages/Login'
 import Dashboard from '@/components/Dashboard'
 import Products from '@/components/pages/Products'
 import CustomerOrders from '@/components/pages/CustomerOrders'
+import CustomerCheckout from '@/components/pages/CustomerCheckout'
 import Orders from '@/components/pages/Orders'
+import Coupon from '@/components/pages/Coupon'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -46,6 +48,11 @@ export default new VueRouter({
           path: 'orders',
           name: 'Orders',
           component: Orders
+        },
+        {
+          path: 'coupon',
+          name: 'Coupon',
+          component: Coupon
         }
       ]
     },
@@ -58,6 +65,11 @@ export default new VueRouter({
           path: 'customer_orders',
           name: 'CustomerOrders',
           component: CustomerOrders
+        },
+        {
+          path: 'customer_checkout/:orderId',
+          name: 'CustomerCheckout',
+          component: CustomerCheckout
         }
       ]
     }

@@ -123,34 +123,50 @@
           </div>
         </div>
       </div>
-      <div class="my-5 row justify-content-center">
-        <ValidationObserver ref="observer" v-slot="{ invalid }" tag="form" @submit.prevent="submit">
-          <ValidationProvider
-            name="Email"
-            rules="required|email"
-            v-slot="{ valid, errors }"
-            ref="emailField"
-          >
-            <input class="textField" v-model="user.email" type="text" placeholder="請輸入 Email..." />
-            <span class="errorText">{‌{ errors[0] }}</span>
-          </ValidationProvider>
-          <br />
-          <div class="label">密碼</div>
-          <ValidationProvider name="密碼" rules="required|min:3" v-slot="{ errors }">
-            <input class="textField" v-model="user.pw" type="password" placeholder="請輸入密碼..." />
-            <span class="errorText">{‌{ errors[0] }}</span>
-          </ValidationProvider>
-          <br />
-          <div class="label">確認密碼</div>
-          <ValidationProvider name="確認密碼" rules="required|min:3|confirmed:密碼" v-slot="{ errors }">
-            <input class="textField" type="password" v-model="user.pwConfirm" placeholder="再輸入一次密碼..." />
-            <span class="errorText">{‌{ errors[0] }}</span>
-          </ValidationProvider>
+    </div>
+    <div class="my-5 row justify-content-center">
+      <form class="col-md-6" @submit.prevent="createOrder">
+        <div class="form-group">
+          <label for="useremail">Email</label>
+          <input type="email" class="form-control" name="email" id="useremail"
+            v-validate="'required|email'"
+            required
+            v-model="form.user.email" placeholder="請輸入 Email">
+          <span class="text-danger" v-if="errors.has('email')">
+            {{errors.first('email')}}
+          </span>
+        </div>
 
-          <!-- button 的 invalid 樣式是綁定 ValidationObserver 的 v-slot="{invalid}" -->
-          <button class="submitBtn" :class="{button__unactive:invalid}" :disabled="invalid">Submit</button>
-        </ValidationObserver>
-      </div>
+        <div class="form-group">
+          <label for="username">收件人姓名</label>
+          <input type="text" class="form-control" name="name" id="username"
+            :class="{'is-invalid':errors.has('name')}"
+            v-model="form.user.name" v-validate="'required'" placeholder="輸入姓名">
+          <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
+        </div>
+
+        <div class="form-group">
+          <label for="usertel">收件人電話</label>
+          <input type="tel" class="form-control" name="tel" id="usertel" v-model="form.user.tel" placeholder="請輸入電話">
+          <span class="text-danger" v-if="errors.has('tel')">電話必須輸入</span>
+        </div>
+
+        <div class="form-group">
+          <label for="useraddress">收件人地址</label>
+          <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address"
+            v-validate="'required'"
+            placeholder="請輸入地址">
+          <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">留言</label>
+          <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"></textarea>
+        </div>
+        <div class="text-right">
+          <button class="btn btn-danger">送出訂單</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -249,10 +265,21 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`
       const vm = this
       const order = vm.form
-      vm.isLoading = true
-      this.$http.post(api, {data: order}).then((response) => {
-        console.log('訂單已建立====', response)
-        vm.isLoading = false
+      // vm.isLoading = true
+      this.$validator.validate().then((result) => {
+        console.log('result====', result)
+        if (result) {
+          // do stuff if not valid
+          this.$http.post(api, {data: order}).then((response) => {
+            console.log('訂單已建立====', response)
+            if (response.data.success) {
+              vm.$router.push(`/customer_checkout/${response.data.orderId}`)
+            }
+            vm.isLoading = false
+          })
+        } else {
+          console.log('欄位不完整')
+        }
       })
     }
   },

@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <loading :active.sync="isLoading"></loading>
     <table class="table mt-4 text-left">
         <thead>
           <tr>
@@ -10,25 +12,59 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in products" :key="item.id">
-            <td>{{ item.category }}</td>
-            <td>{{ item.title }}</td>
-            <td class="text-right">
-              {{ item.origin_price | currency }}
+          <tr v-for="order in orders" :key="order.id">
+            <td>{{ order.create_at | date }}</td>
+            <td>{{ order.user.email }}</td>
+            <td>
+              <ul class="list-unstyled">
+                <li v-for="(order_product, i) in order.products" :key="i">
+                  {{order_product.product.title}}:{{order_product.qty}}
+                  {{order_product.product.unit}}
+                </li>
+              </ul>
             </td>
             <td class="text-right">
-              {{ item.price | currency }}
+              {{ order.total | currency }}
             </td>
             <td>
-              <span v-if="item.is_enabled" class="text-success">啟用</span>
-              <span v-else>未啟用</span>
+              <strong class="text-success" v-if="order.is_paid">已付款</strong>
+              <span class="text-muted" v-else>尚未付款</span>
             </td>
           </tr>
         </tbody>
     </table>
+    <Pagination :pagination="pagination" @switchPagination="getOrders"/>
+  </div>
 </template>
 <script>
+import Pagination from '../Pagination'
+
 export default {
-  data () {}
+  components: {
+    Pagination
+  },
+  data () {
+    return {
+      orders: [],
+      pagination: {},
+      isLoading: false
+    }
+  },
+  methods: {
+    getOrders (page = 1) {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/orders?page=${page}`
+      const vm = this
+      vm.isLoading = true
+      this.$http.get(api).then((response) => {
+        vm.isLoading = false
+        vm.orders = response.data.orders
+        vm.pagination = response.data.pagination
+        console.log('json.response=====', response)
+      })
+    }
+  },
+  created () {
+    this.getOrders()
+  }
 }
 </script>

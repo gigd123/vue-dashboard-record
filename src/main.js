@@ -6,16 +6,15 @@ import VueAxios from 'vue-axios'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import 'bootstrap'
-import { ValidationProvider, extend } from 'vee-validate'
-// 將驗證條件引入
-import * as rules from 'vee-validate/dist/rules'
-// 引入中文化的文件
-import tw from 'vee-validate/dist/locale/zh_TW'
+import VeeValidate from 'vee-validate'
+import zhTW from 'vee-validate/dist/locale/zh_TW'
+import VueI18n from 'vue-i18n'
 
 import router from './router'
 import App from './App'
 import './bus'
 import currencyFilter from './filters/currency'
+import dateFilter from '@/filters/date'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
@@ -27,19 +26,23 @@ axios.defaults.withCredentials = true
 Vue.component('Loading', Loading)
 // 全域啟用
 Vue.filter('currency', currencyFilter)
+Vue.filter('date', dateFilter)
 
-// 將條件加入 extend
-for (let rule in rules) {
-  extend(rule, {
-    ...rules[rule], // add the rule
-    message: tw.messages[rule] // 把 message 加進去並中文化
-  })
-}
-// 全域啟用 ValidationProvider
-Vue.component('ValidationProvider', ValidationProvider)
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'zhTW'
+})
+Vue.use(VeeValidate, {
+  events: 'input|blur', // 這是為了讓使用者離開該欄位時觸發驗證
+  i18n,
+  dictionary: {
+    zhTW
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
+  i18n,
   el: '#app',
   components: { App },
   template: '<App/>',
@@ -48,7 +51,6 @@ new Vue({
 
 // to 要去的網址，from 來自哪個網址， next
 router.beforeEach((to, from, next) => {
-  console.log('to', to, 'from', from, 'next', next)
   if (to.meta.requiresAuth) {
     const api = `${process.env.APIPATH}/api/user/check`
     axios.post(api).then((response) => {

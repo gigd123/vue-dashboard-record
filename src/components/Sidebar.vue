@@ -16,8 +16,14 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/admin/orders">
-            <i class="fas fa-box-open"></i>
+            <i class="fas fa-list-alt"></i>
             訂單列表
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/admin/coupon">
+            <i class="fas fa-money-bill"></i>
+            優惠券
             </router-link>
           </li>
         </ul>

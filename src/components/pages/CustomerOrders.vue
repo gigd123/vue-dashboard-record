@@ -76,6 +76,7 @@
       </div>
     </div>
     <hr class="pt-3 pb-3">
+    <!-- order data -->
     <div class="my-5 row justify-content-center" v-if="cart.carts">
       <div class="my-5 row justify-content-center">
         <table class="table">
@@ -124,6 +125,7 @@
         </div>
       </div>
     </div>
+    <!-- member data -->
     <div class="my-5 row justify-content-center">
       <form class="col-md-6" @submit.prevent="createOrder">
         <div class="form-group">

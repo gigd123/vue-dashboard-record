@@ -18,7 +18,7 @@ export default new VueRouter({
   routes: [
     {
       // 非定義的路徑導向 Login
-      path: '*',
+      path: '*/',
       redirect: 'Login'
     },
     // {

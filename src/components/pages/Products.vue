@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-primary"
         @click="openModal(true)">
@@ -181,27 +180,22 @@ export default {
   },
   data () {
     return {
-      products: [],
       pagination: {},
       tempProduct: {},
       isNew: false,
-      isLoading: false,
       status: {
         fileUploading: false
       }
     }
   },
+  computed: {
+    products () {
+      return this.$store.state.products
+    }
+  },
   methods: {
     getProducts (page = 1) {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`
-      const vm = this
-      vm.isLoading = true
-      this.$http.get(api).then((response) => {
-        vm.isLoading = false
-        vm.products = response.data.products
-        vm.pagination = response.data.pagination
-        console.log('json.response=====', response)
-      })
+      this.$store.dispatch('getProducts')
     },
     openModal (isNew, item) {
       if (isNew) {

@@ -3,14 +3,15 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuex from 'vuex'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import 'bootstrap'
 import VeeValidate from 'vee-validate'
 import zhTW from 'vee-validate/dist/locale/zh_TW'
 import VueI18n from 'vue-i18n'
-
 import router from './router'
+import store from './store'
 import App from './App'
 import './bus'
 import currencyFilter from './filters/currency'
@@ -18,6 +19,7 @@ import dateFilter from '@/filters/date'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
+Vue.use(Vuex)
 
 // withCredentials 會自動將 cookie 存在前端，每次發送 api 也會往後端送
 axios.defaults.withCredentials = true
@@ -46,7 +48,8 @@ new Vue({
   el: '#app',
   components: { App },
   template: '<App/>',
-  router
+  router,
+  store
 })
 
 // to 要去的網址，from 來自哪個網址， next

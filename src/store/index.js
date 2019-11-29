@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import ProductsModule from './product'
 
 Vue.use(Vuex)
 
@@ -9,22 +10,40 @@ export default new Vuex.Store({
   strict: true,
   state: {
     isLoading: false,
-    products: []
+    cart: {}
   },
   // 操作行為，如ajax，但是不用於操作資料狀態
   actions: {
     updateLoading (context, status) {
       context.commit('LOADING', status)
     },
-    getProducts (context, page = 1) {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`
+    getCart (context) {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`
       context.commit('LOADING', true)
-      // 由於這邊的 this 不是指向原本 vue 的元件，無法使用 this 直接去使用 $http中的 方法，必須另行導入 axios
-      // this.$http.get(api).then((response) => {
       axios.get(api).then((response) => {
-        context.commit('PRODUCTS', response.data.products)
-        // vm.pagination = response.data.pagination
+        context.commit('CART', response.data.data)
         context.commit('LOADING', false)
+      })
+    },
+    removeCartItem (context, id) {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`
+      context.commit('LOADING', true)
+      axios.delete(api).then((response) => {
+        context.dispatch('getCart')
+        context.commit('LOADING', false)
+      })
+    },
+    // 在傳參數進入 action 時候，一次只能傳入一個參數 (context, id, qty = 1)， qty 會變成 undefined
+    addToCart (context, {id, qty}) {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`
+      const cart = {
+        product_id: id,
+        qty
+      }
+      // vm.status.loadingItem = id
+      axios.post(api, {data: cart}).then((response) => {
+        // vm.status.loadingItem = ''
+        context.dispatch('getCart')
       })
     }
   },
@@ -33,8 +52,13 @@ export default new Vuex.Store({
     LOADING (state, status) {
       state.isLoading = status
     },
-    PRODUCTS (state, payload) {
-      state.products = payload
+    CART (state, payload) {
+      state.cart = payload
     }
+  },
+  // 取代 computed
+  getters: {
+    isLoading: state => state.isLoading,
+    cart: state => state.cart
   }
 })

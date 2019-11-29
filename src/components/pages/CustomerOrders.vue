@@ -179,9 +179,7 @@ import $ from 'jquery'
 export default {
   data () {
     return {
-      products: [],
       product: {},
-      cart: {},
       status: {
         loadingItem: ''
       },
@@ -198,15 +196,17 @@ export default {
       coupon_code: ''
     }
   },
+  computed: {
+    products () {
+      return this.$store.state.products
+    },
+    cart () {
+      return this.$store.state.cart
+    }
+  },
   methods: {
     getProducts () {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products`
-      const vm = this
-      vm.isLoading = true
-      this.$http.get(api).then((response) => {
-        vm.products = response.data.products
-        vm.isLoading = false
-      })
+      this.$store.dispatch('getProducts')
     },
     getProduct (id) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
@@ -220,35 +220,15 @@ export default {
       })
     },
     addToCart (id, qty = 1) {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`
-      const vm = this
-      const cart = {
-        product_id: id,
-        qty
-      }
-      vm.status.loadingItem = id
-      this.$http.post(api, {data: cart}).then((response) => {
-        console.log('response~~~~~~', response)
-        vm.status.loadingItem = ''
-        $('#productModal').modal('hide')
-        this.getCart()
-      })
+      this.$store.dispatch('addToCart', {id, qty})
+      // 待修正---------確認加入成功才關閉 modal
+      $('#productModal').modal('hide')
     },
     getCart () {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`
-      const vm = this
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data
-      })
+      this.$store.dispatch('getCart')
     },
     removeCartItem (id) {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`
-      const vm = this
-      vm.isLoading = true
-      this.$http.delete(api).then((response) => {
-        vm.getCart()
-        vm.isLoading = false
-      })
+      this.$store.dispatch('removeCartItem', id)
     },
     addCouponCode () {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon`

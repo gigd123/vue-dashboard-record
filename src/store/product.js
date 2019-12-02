@@ -2,6 +2,10 @@ import axios from 'axios'
 
 export default {
   strict: true,
+  // state 屬於模組區域變數
+  // actions, mutations, getters 預設是屬於全域變數
+  // 若是設定 namespaced 為 true，則會將 actions, mutations, getters 轉為區域變數
+  namespaced: true,
   state: {
     products: []
   },
@@ -9,13 +13,14 @@ export default {
   actions: {
     getProducts (context, page) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`
-      context.commit('LOADING', true)
+      // 由於 LOADING 是屬於 global，必須加上 {root: true} 判斷為 global
+      context.commit('LOADING', true, {root: true})
       // 由於這邊的 this 不是指向原本 vue 的元件，無法使用 this 直接去使用 $http中的 方法，必須另行導入 axios
       // this.$http.get(api).then((response) => {
       axios.get(api).then((response) => {
         context.commit('PRODUCTS', response.data.products)
         // vm.pagination = response.data.pagination
-        context.commit('LOADING', false)
+        context.commit('LOADING', false, {root: true})
       })
     }
   },
@@ -27,6 +32,6 @@ export default {
   },
   // 取代 computed
   getters: {
-    products: state => state.products,
+    products: state => state.products
   }
 }

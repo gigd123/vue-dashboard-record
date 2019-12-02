@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import ProductsModule from './product'
+import productsModule from './product'
 
 Vue.use(Vuex)
 
@@ -60,5 +60,8 @@ export default new Vuex.Store({
   getters: {
     isLoading: state => state.isLoading,
     cart: state => state.cart
+  },
+  modules: {
+    productsModule
   }
 })

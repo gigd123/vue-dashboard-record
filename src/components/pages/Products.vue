@@ -173,7 +173,7 @@
 <script>
 import $ from 'jquery'
 import Pagination from '../Pagination'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -190,10 +190,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['products'])
+    // 若只是要取得全域變數用下面的方式呼叫
+    // ...mapGetters(['products'])
+    // 若要取得特定模組的變數，則要呼叫指定的模組
+    ...mapGetters('productsModule', ['products'])
   },
   methods: {
-    ...mapActions(['getProducts']),
+    getProducts (page) {
+      // console.log('modules===', this.$store.modules)
+      // this.$store.modules.dispatch('getProducts', page)
+    },
     openModal (isNew, item) {
       if (isNew) {
         this.tempProduct = {}

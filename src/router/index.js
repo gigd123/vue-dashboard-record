@@ -9,6 +9,7 @@ import CustomerOrders from '@/components/pages/CustomerOrders'
 import CustomerCheckout from '@/components/pages/CustomerCheckout'
 import Orders from '@/components/pages/Orders'
 import Coupon from '@/components/pages/Coupon'
+import Home from '@/components/pages/Front/Home.vue'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -27,6 +28,11 @@ export default new VueRouter({
     //   component: HelloWorld,
     //   meta: { requiresAuth: true }
     // },
+    {
+      name: 'Home', // 元件呈現的名稱
+      path: '/Home', // 對應的虛擬路徑
+      component: Home // 對應的元件
+    },
     {
       name: 'Login', // 元件呈現的名稱
       path: '/Login', // 對應的虛擬路徑

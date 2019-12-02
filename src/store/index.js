@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import ProductsModule from './product'
 
 Vue.use(Vuex)
 

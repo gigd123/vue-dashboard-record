@@ -9,7 +9,7 @@ import CustomerOrders from '@/components/pages/CustomerOrders'
 import CustomerCheckout from '@/components/pages/CustomerCheckout'
 import Orders from '@/components/pages/Orders'
 import Coupon from '@/components/pages/Coupon'
-import Home from '@/components/pages/Front/Home.vue'
+import FrontDashboard from '@/components/pages/Front/Dashboard'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -29,9 +29,9 @@ export default new VueRouter({
     //   meta: { requiresAuth: true }
     // },
     {
-      name: 'Home', // 元件呈現的名稱
-      path: '/Home', // 對應的虛擬路徑
-      component: Home // 對應的元件
+      name: 'FrontDashboard', // 元件呈現的名稱
+      path: '/FrontDashboard', // 對應的虛擬路徑
+      component: FrontDashboard // 對應的元件
     },
     {
       name: 'Login', // 元件呈現的名稱

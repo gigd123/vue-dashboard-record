@@ -1,25 +1,29 @@
 <template>
-  <div>
-    <Navbar />
-    <div class="container-fluid">
-      <div class="row">
-        <Sidebar />
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
-        </main>
-      </div>
+  <div id="carouselExampleControls" class="carousel slide pt-3 h-75" data-ride="carousel">
+  <div class="carousel-inner h-75">
+    <div class="carousel-item active">
+      <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
+    </div>
+    <div class="carousel-item">
+      <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
+    </div>
+    <div class="carousel-item">
+      <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
     </div>
   </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 </template>
 
 <script>
-import Sidebar from './Sidebar'
-import Navbar from './Navbar'
-
 export default {
-  components: {
-    Sidebar,
-    Navbar
-  }
+
 }
 </script>

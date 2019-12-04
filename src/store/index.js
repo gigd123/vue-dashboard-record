@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-<<<<<<< HEAD
 import productsModule from './product'
-=======
->>>>>>> 1e100c39d1c2c075af91a00161999da077fbfdfd
 
 Vue.use(Vuex)
 

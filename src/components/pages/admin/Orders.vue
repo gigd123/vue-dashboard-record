@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-import Pagination from '../Pagination'
+import Pagination from '../../common/Pagination'
 
 export default {
   components: {

@@ -31,8 +31,8 @@
               <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               加到購物車
             </button>
+          </div>
         </div>
-      </div>
       </div>
     </div>
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
@@ -175,6 +175,7 @@
 
 <script>
 import $ from 'jquery'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -205,9 +206,7 @@ export default {
     }
   },
   methods: {
-    getProducts () {
-      this.$store.dispatch('getProducts')
-    },
+    ...mapActions(['getProducts']),
     getProduct (id) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
       const vm = this

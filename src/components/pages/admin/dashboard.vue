@@ -16,7 +16,7 @@
 <script>
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import Alert from './AlertMessage'
+import Alert from './../../common/AlertMessage'
 
 export default {
   components: {

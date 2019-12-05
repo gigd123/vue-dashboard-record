@@ -7,16 +7,24 @@
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">運動</a>
+          <router-link class="nav-link" to="/FrontDashboard/Home">
+          首頁
+          </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">男士</a>
+          <router-link class="nav-link" to="/FrontDashboard/Male">
+          男士
+          </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">女士</a>
+          <router-link class="nav-link" to="/FrontDashboard/FrontProducts">
+          女士
+          </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">兒童及嬰幼兒</a>
+          <router-link class="nav-link" to="/FrontDashboard/Child">
+          兒童及嬰幼兒
+          </router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">運動配件</a>

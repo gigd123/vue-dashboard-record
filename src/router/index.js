@@ -2,14 +2,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 自訂的分頁元件
-import Login from '@/components/pages/Login'
-import Dashboard from '@/components/Dashboard'
-import Products from '@/components/pages/Products'
-import CustomerOrders from '@/components/pages/CustomerOrders'
-import CustomerCheckout from '@/components/pages/CustomerCheckout'
-import Orders from '@/components/pages/Orders'
-import Coupon from '@/components/pages/Coupon'
+import Login from '@/components/pages/admin/Login'
+import Dashboard from '@/components/pages/admin/Dashboard'
+import Products from '@/components/pages/admin/Products'
+import CustomerOrders from '@/components/pages/admin/CustomerOrders'
+import CustomerCheckout from '@/components/pages/admin/CustomerCheckout'
+import Orders from '@/components/pages/admin/Orders'
+import Coupon from '@/components/pages/admin/Coupon'
 import FrontDashboard from '@/components/pages/Front/Dashboard'
+import FrontProducts from '@/components/pages/Front/Products'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -31,7 +32,14 @@ export default new VueRouter({
     {
       name: 'FrontDashboard', // 元件呈現的名稱
       path: '/FrontDashboard', // 對應的虛擬路徑
-      component: FrontDashboard // 對應的元件
+      component: FrontDashboard, // 對應的元件
+      children: [
+        {
+          path: 'FrontProducts',
+          name: 'FrontProducts',
+          component: FrontProducts
+        }
+      ]
     },
     {
       name: 'Login', // 元件呈現的名稱

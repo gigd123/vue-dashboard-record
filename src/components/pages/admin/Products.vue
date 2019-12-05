@@ -172,8 +172,8 @@
 
 <script>
 import $ from 'jquery'
-import Pagination from '../Pagination'
-import { mapGetters } from 'vuex'
+import Pagination from '../../common/Pagination'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -196,10 +196,7 @@ export default {
     ...mapGetters('productsModule', ['products'])
   },
   methods: {
-    getProducts (page) {
-      // console.log('modules===', this.$store.modules)
-      // this.$store.modules.dispatch('getProducts', page)
-    },
+    ...mapActions('productsModule', ['getProducts']),
     openModal (isNew, item) {
       if (isNew) {
         this.tempProduct = {}

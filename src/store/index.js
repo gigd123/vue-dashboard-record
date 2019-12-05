@@ -54,9 +54,6 @@ export default new Vuex.Store({
     },
     CART (state, payload) {
       state.cart = payload
-    },
-    CATEGORIES (state, payload) {
-
     }
   },
   // 取代 computed

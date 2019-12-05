@@ -6,29 +6,14 @@
     </button>
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <router-link class="nav-link" to="/FrontDashboard/Home">
-          首頁
-          </router-link>
+        <li class="nav-item active" v-for="(item, index) in getCategories" :key="index">
+          <a class="nav-link" href="#"
+            @click.prevent=""
+            v-if="item === 'M' | item === 'F' | item === 'C'">{{ item === 'M' ? '男士' : item === 'F' ? '女士' : '兒童'}}</a>
         </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/FrontDashboard/Male">
-          男士
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/FrontDashboard/FrontProducts">
-          女士
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/FrontDashboard/Child">
-          兒童及嬰幼兒
-          </router-link>
-        </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">運動配件</a>
-        </li>
+        </li> -->
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -41,5 +26,10 @@
 <script>
 export default {
 
+  computed: {
+    getCategories () {
+      return this.$store.state.productsModule.categories
+    }
+  }
 }
 </script>

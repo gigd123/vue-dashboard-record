@@ -63,6 +63,7 @@
 <script>
 import $ from 'jquery'
 import Pagination from '../../common/Pagination'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -72,7 +73,6 @@ export default {
     return {
       pagination: {},
       product: {},
-      products: [],
       categories: [],
       searchText: '',
       status: {
@@ -104,20 +104,11 @@ export default {
         })
       }
       return this.products
-    }
+    },
+    ...mapGetters('productsModule', ['products'])
   },
   methods: {
-    getProducts (page = 1) {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`
-      const vm = this
-      vm.$store.dispatch('updateLoading', true)
-      this.$http.get(api).then((response) => {
-        vm.products = response.data.products
-        vm.pagination = response.data.pagination
-        vm.getUnique()
-        vm.$store.dispatch('updateLoading', false)
-      })
-    },
+    ...mapActions('productsModule', ['getProducts']),
     getProduct (id) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
       const vm = this

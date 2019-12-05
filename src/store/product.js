@@ -7,7 +7,8 @@ export default {
   // 若是設定 namespaced 為 true，則會將 actions, mutations, getters 轉為區域變數
   namespaced: true,
   state: {
-    products: []
+    products: [],
+    categories: []
   },
   // 操作行為，如ajax，但是不用於操作資料狀態
   actions: {
@@ -20,6 +21,7 @@ export default {
       // this.$http.get(api).then((response) => {
       axios.get(api).then((response) => {
         context.commit('PRODUCTS', response.data.products)
+        context.commit('CATEGORIES', response.data.products)
         // vm.pagination = response.data.pagination
         context.commit('LOADING', false, {root: true})
       })
@@ -34,6 +36,11 @@ export default {
   mutations: {
     PRODUCTS (state, payload) {
       state.products = payload
+    },
+    CATEGORIES (state, payload) {
+      payload.forEach((item) => {
+        state.categories.push(item.category)
+      })
     }
   },
   // 取代 computed

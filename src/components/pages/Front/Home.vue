@@ -22,7 +22,7 @@
       </a>
     </div> -->
     <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
+      <div class="col-md-4 mb-4" v-for="item in filterProducts" :key="item.id">
         <div class="card border-0 shadow-sm">
           <div style="height: 150px; background-size: cover; background-position: center"
             :style="{backgroundImage: `url(${item.imageUrl})`}">
@@ -43,19 +43,20 @@
           <div class="card-footer d-flex">
             <button type="button" class="btn btn-outline-secondary btn-sm"
               @click="getProduct(item.id)">
-              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+              <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
               查看更多
             </button>
             <button type="button" class="btn btn-outline-danger btn-sm ml-auto"
               @click="addToCart(item.id)">
-              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+              <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
               加到購物車
             </button>
           </div>
         </div>
       </div>
     </div>
-    <Pagination :pagination="pagination" @switchPagination="getProducts"/>
+    <ProductContent :product="product" />
+    <Pagination :pagination="pagination" @switchPagination="getAllProducts"/>
   </div>
 
 </template>
@@ -63,11 +64,13 @@
 <script>
 import $ from 'jquery'
 import Pagination from '../../common/Pagination'
+import ProductContent from '../../common/ProductContent'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
-    Pagination
+    Pagination,
+    ProductContent
   },
   data () {
     return {
@@ -95,29 +98,23 @@ export default {
     cart () {
       return this.$store.state.cart
     },
-    filterData () {
-      const vm = this
-      if (vm.searchText) {
-        return vm.products.filter((item) => {
-          const data = item.title.toLowerCase().includes(vm.searchText.toLowerCase())
-          return data
-        })
-      }
-      return this.products
-    },
-    ...mapGetters('productsModule', ['products'])
+    ...mapGetters({
+      loadingItem: 'loadingItem',
+      products: 'productsModule/products',
+      filterProducts: 'productsModule/filterProducts'
+    })
   },
   methods: {
-    ...mapActions('productsModule', ['getProducts']),
+    ...mapActions('productsModule', ['getAllProducts']),
     getProduct (id) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
       const vm = this
-      vm.status.loadingItem = id
+      this.$store.commit('LOADINGITEM', id)
       this.$http.get(api).then((response) => {
         response.data.product.num = 1
         vm.product = response.data.product
         $('#productModal').modal('show')
-        vm.status.loadingItem = ''
+        this.$store.commit('LOADINGITEM', '')
       })
     },
     addToCart (id, qty = 1) {
@@ -174,7 +171,7 @@ export default {
     }
   },
   created () {
-    this.getProducts()
+    this.getAllProducts()
     this.getCart()
   }
 }

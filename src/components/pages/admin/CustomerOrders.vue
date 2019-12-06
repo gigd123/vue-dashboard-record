@@ -206,7 +206,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getProducts']),
+    ...mapActions(['getAllProducts']),
     getProduct (id) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
       const vm = this
@@ -265,7 +265,7 @@ export default {
     }
   },
   created () {
-    this.getProducts()
+    this.getAllProducts()
     this.getCart()
   }
 }

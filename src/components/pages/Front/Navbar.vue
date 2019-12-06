@@ -6,9 +6,9 @@
     </button>
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active" v-for="(item, index) in getCategories" :key="index">
+        <li class="nav-item active" v-for="(item, index) in categories" :key="index">
           <a class="nav-link" href="#"
-            @click.prevent=""
+            @click.prevent="searchText(item)"
             v-if="item === 'M' | item === 'F' | item === 'C'">{{ item === 'M' ? '男士' : item === 'F' ? '女士' : '兒童'}}</a>
         </li>
         <!-- <li class="nav-item">
@@ -24,12 +24,17 @@
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex'
 
-  computed: {
-    getCategories () {
-      return this.$store.state.productsModule.categories
+export default {
+  methods: {
+    searchText (text) {
+      console.log(text)
+      this.$store.commit('productsModule/SEARCHTEXT', text)
     }
+  },
+  computed: {
+    ...mapGetters('productsModule', ['categories'])
   }
 }
 </script>

@@ -196,7 +196,7 @@ export default {
     ...mapGetters('productsModule', ['products'])
   },
   methods: {
-    ...mapActions('productsModule', ['getProducts']),
+    ...mapActions('productsModule', ['getAllProducts']),
     openModal (isNew, item) {
       if (isNew) {
         this.tempProduct = {}
@@ -268,7 +268,7 @@ export default {
     }
   },
   created () {
-    this.getProducts()
+    this.getAllProducts()
   }
 }
 </script>

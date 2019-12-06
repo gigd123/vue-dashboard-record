@@ -10,12 +10,16 @@ export default new Vuex.Store({
   strict: true,
   state: {
     isLoading: false,
+    loadingItem: '',
     cart: {}
   },
   // 操作行為，如ajax，但是不用於操作資料狀態
   actions: {
     updateLoading (context, status) {
       context.commit('LOADING', status)
+    },
+    updateLoadingItem (context, status) {
+      context.commit('LOADINGITEM', status)
     },
     getCart (context) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`
@@ -40,9 +44,9 @@ export default new Vuex.Store({
         product_id: id,
         qty
       }
-      // vm.status.loadingItem = id
+      context.commit('LOADINGITEM', id)
       axios.post(api, {data: cart}).then((response) => {
-        // vm.status.loadingItem = ''
+        context.commit('LOADINGITEM', '')
         context.dispatch('getCart')
       })
     }
@@ -52,6 +56,9 @@ export default new Vuex.Store({
     LOADING (state, status) {
       state.isLoading = status
     },
+    LOADINGITEM (state, payload) {
+      state.loadingItem = payload
+    },
     CART (state, payload) {
       state.cart = payload
     }
@@ -59,6 +66,7 @@ export default new Vuex.Store({
   // 取代 computed
   getters: {
     isLoading: state => state.isLoading,
+    loadingItem: state => state.loadingItem,
     cart: state => state.cart
   },
   modules: {

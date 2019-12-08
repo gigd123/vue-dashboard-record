@@ -19,6 +19,17 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
+      <div class="cart dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-shopping-cart text-secondary"></i>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
@@ -38,3 +49,7 @@ export default {
   }
 }
 </script>
+
+<style>
+  @import url("@fortawesome/fontawesome-free/css/all.css");
+</style>

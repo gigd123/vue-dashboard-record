@@ -17,6 +17,7 @@
         <li class="nav-item">
           <a class="nav-link" href="#">
             <span data-feather="shopping-cart"></span>
+            <i class="fal fa-shopping-cart"></i>
             Products
           </a>
         </li>

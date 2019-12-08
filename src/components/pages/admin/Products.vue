@@ -37,7 +37,7 @@
         </tbody>
       </table>
       <!-- Pagination -->
-      <Pagination :pagination="pagination" @switchPagination="getProducts"/>
+      <Pagination :pagination="pagination" @switchPagination="getAllProducts"/>
       <!-- Modal -->
       <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -223,7 +223,7 @@ export default {
       this.$http[httpMethod](api, {data: vm.tempProduct}).then((response) => {
         if (response.data.success) {
           $('#productModal').modal('hide')
-          vm.getProducts()
+          vm.getAllProducts()
         } else {
           console.log('恭喜新增失敗，垃圾~!')
         }
@@ -259,7 +259,7 @@ export default {
       this.$http.delete(api).then((response) => {
         if (response.data.success) {
           $('#delProductModal').modal('hide')
-          vm.getProducts()
+          vm.getAllProducts()
         }
       })
     },

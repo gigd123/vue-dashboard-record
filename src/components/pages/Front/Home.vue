@@ -42,7 +42,7 @@
           </div>
           <div class="card-footer d-flex">
             <button type="button" class="btn btn-outline-secondary btn-sm"
-              @click="getProduct(item.id)">
+              @click="getProductDetail(item.id)">
               <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
               查看更多
             </button>
@@ -116,6 +116,10 @@ export default {
         $('#productModal').modal('show')
         this.$store.commit('LOADINGITEM', '')
       })
+    },
+    getProductDetail (productId, size, qty = 1) {
+      const vm = this
+      vm.$router.push({path: `/FrontDashboard/ProductDetail/${productId}`, query: {size: size, qty: qty}})
     },
     addToCart (id, qty = 1) {
       this.$store.dispatch('addToCart', {id, qty})

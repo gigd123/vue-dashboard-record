@@ -10,7 +10,7 @@ import CustomerCheckout from '@/components/pages/admin/CustomerCheckout'
 import Orders from '@/components/pages/admin/Orders'
 import Coupon from '@/components/pages/admin/Coupon'
 import FrontDashboard from '@/components/pages/Front/Dashboard'
-import FrontProducts from '@/components/pages/Front/Products'
+import ProductDetail from '@/components/pages/Front/ProductDetail'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -35,9 +35,9 @@ export default new VueRouter({
       component: FrontDashboard, // 對應的元件
       children: [
         {
-          path: 'FrontProducts',
-          name: 'FrontProducts',
-          component: FrontProducts
+          path: 'ProductDetail/productId',
+          name: 'ProductDetail',
+          component: ProductDetail
         }
       ]
     },

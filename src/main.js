@@ -53,21 +53,21 @@ new Vue({
 })
 
 // to 要去的網址，from 來自哪個網址， next
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.requiresAuth) {
-//     const api = `${process.env.APIPATH}/api/user/check`
-//     axios.post(api).then((response) => {
-//     // this.$http.post(api).then((response) => { 由於現在是在 router 上面，並非直接在 vue 原件上，無法直接使用 $http，必須直接呼叫 Axios
-//       console.log(response.data)
-//       if (response.data.success) {
-//         next()
-//       } else {
-//         next({
-//           path: '/Login'
-//         })
-//       }
-//     })
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const api = `${process.env.APIPATH}/api/user/check`
+    axios.post(api).then((response) => {
+    // this.$http.post(api).then((response) => { 由於現在是在 router 上面，並非直接在 vue 原件上，無法直接使用 $http，必須直接呼叫 Axios
+      console.log(response.data)
+      if (response.data.success) {
+        next()
+      } else {
+        next({
+          path: '/Login'
+        })
+      }
+    })
+  } else {
+    next()
+  }
+})

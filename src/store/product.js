@@ -52,7 +52,7 @@ export default {
         state.categories.push(item.category)
       })
     },
-    SEARCHTEXT (state, payload) {
+    SEARCH_TEXT (state, payload) {
       state.searchText = payload
     }
   },

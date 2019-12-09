@@ -55,8 +55,8 @@
         </div>
       </div>
     </div>
-    <ProductContent :product="product" />
-    <Pagination :pagination="pagination" @switchPagination="getAllProducts"/>
+    <ProductModal :product="product" />
+    <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
   </div>
 
 </template>
@@ -64,13 +64,13 @@
 <script>
 import $ from 'jquery'
 import Pagination from '../../common/Pagination'
-import ProductContent from '../../common/ProductContent'
+import ProductModal from '../../common/ProductModal'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Pagination,
-    ProductContent
+    ProductModal
   },
   data () {
     return {
@@ -105,7 +105,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions('productsModule', ['getAllProducts']),
+    ...mapActions('productsModule', ['getClientAllProducts']),
     getProduct (id) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
       const vm = this
@@ -123,7 +123,7 @@ export default {
       $('#productModal').modal('hide')
     },
     getCart () {
-      this.$store.dispatch('getCart')
+      this.$store.dispatch('cartModule/getCart')
     },
     removeCartItem (id) {
       this.$store.dispatch('removeCartItem', id)
@@ -171,7 +171,7 @@ export default {
     }
   },
   created () {
-    this.getAllProducts()
+    this.getClientAllProducts()
     this.getCart()
   }
 }

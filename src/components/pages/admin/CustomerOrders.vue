@@ -224,7 +224,7 @@ export default {
       $('#productModal').modal('hide')
     },
     getCart () {
-      this.$store.dispatch('getCart')
+      this.$store.dispatch('cartModule/getCart')
     },
     removeCartItem (id) {
       this.$store.dispatch('removeCartItem', id)

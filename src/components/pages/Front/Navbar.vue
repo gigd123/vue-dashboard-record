@@ -19,15 +19,43 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
-      <div class="cart dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-shopping-cart text-secondary"></i>
+      <div class="cart dropdown ml-2">
+        <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-shopping-cart text-white"></i>
         </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <div class="cartNumber bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
+        <div class="dropdown-menu cartMenu" aria-labelledby="dropdownMenuLink"
+          v-if="cart.carts">
+            <table class="table">
+              <thead>
+                <th>品名</th>
+                <th width="80">尺寸</th>
+                <th width="60">數量</th>
+                <th width="50"></th>
+              </thead>
+              <tbody>
+              <tr v-for="cart in cart.carts" :key="cart.id">
+                <td>{{cart.product.title}}</td>
+                <td></td>
+                <td>{{cart.product.num}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-danger btn-sm"
+                  @click="removeCartItem(cart.id)">
+                  <i class="far fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+            <!-- <div class="dropdown-item border-bottom d-flex">
+              <div class="mr-2"></div>
+              <div></div>
+            </div> -->
+          <a class="dropdown-item text-center text-danger" href="#">直接去結帳</a>
+        </div>
+        <div class=" cartMenu" aria-labelledby="dropdownMenuLink"
+          v-else>
+          <div class="dropdown-item">0 個商品</div>
         </div>
       </div>
     </div>
@@ -41,15 +69,34 @@ export default {
   methods: {
     searchText (text) {
       console.log(text)
-      this.$store.commit('productsModule/SEARCHTEXT', text)
+      this.$store.commit('productsModule/SEARCH_TEXT', text)
+    },
+    removeCartItem (id) {
+      this.$store.dispatch('cartModule/removeCartItem', id)
     }
   },
   computed: {
-    ...mapGetters('productsModule', ['categories'])
+    ...mapGetters({
+      categories: 'productsModule/categories',
+      cart: 'cartModule/cart',
+      cartsLen: 'cartModule/cartsLen'
+    })
   }
 }
 </script>
 
 <style>
   @import url("@fortawesome/fontawesome-free/css/all.css");
+  .cartMenu {
+    left: unset;
+    right: 0;
+    min-width: 350px;
+  }
+  .cartNumber {
+    top: -5px;
+    right: 5px;
+    border: 1px solid;
+    width: 18px;
+    height: 18px;
+  }
 </style>

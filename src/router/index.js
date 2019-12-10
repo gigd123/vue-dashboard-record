@@ -11,6 +11,7 @@ import Orders from '@/components/pages/admin/Orders'
 import Coupon from '@/components/pages/admin/Coupon'
 import FrontDashboard from '@/components/pages/Front/Dashboard'
 import ProductDetail from '@/components/pages/Front/ProductDetail'
+import Home from '@/components/pages/Front/Home'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -33,7 +34,13 @@ export default new VueRouter({
       name: 'FrontDashboard', // 元件呈現的名稱
       path: '/FrontDashboard', // 對應的虛擬路徑
       component: FrontDashboard, // 對應的元件
+      redirect: '/FrontDashboard/Home',
       children: [
+        {
+          path: 'Home',
+          name: 'Home',
+          component: Home
+        },
         {
           path: 'ProductDetail/productId',
           name: 'ProductDetail',

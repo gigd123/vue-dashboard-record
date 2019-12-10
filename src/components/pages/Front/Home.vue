@@ -119,7 +119,7 @@ export default {
     },
     getProductDetail (productId, size, qty = 1) {
       const vm = this
-      vm.$router.push({path: `/FrontDashboard/ProductDetail/${productId}`, query: {size: size, qty: qty}})
+      vm.$router.push({path: `/FrontDashboard/ProductDetail/${productId}`})
     },
     addToCart (id, qty = 1) {
       this.$store.dispatch('addToCart', {id, qty})

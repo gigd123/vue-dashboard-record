@@ -42,7 +42,7 @@ export default new VueRouter({
           component: Home
         },
         {
-          path: 'ProductDetail/productId',
+          path: 'ProductDetail/:productId',
           name: 'ProductDetail',
           component: ProductDetail
         }

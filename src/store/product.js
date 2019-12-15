@@ -8,6 +8,7 @@ export default {
   namespaced: true,
   state: {
     products: [],
+    product: {},
     categories: [],
     searchText: '',
     filterProducts: []
@@ -40,12 +41,24 @@ export default {
         // vm.pagination = response.data.pagination
         context.commit('LOADING', false, {root: true})
       })
+    },
+    getProduct (context, id) {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
+      // this.$store.commit('LOADINGITEM', id)
+      axios.get(api).then((response) => {
+        response.data.product.num = 1
+        context.commit('PRODUCT', response.data.product)
+        // this.$store.commit('LOADINGITEM', '')
+      })
     }
   },
   // 操作資料狀態，非同步行為不要在這邊執行，會導致 state 和 mutation 資料狀態不同步，除錯可能會有困難
   mutations: {
     PRODUCTS (state, payload) {
       state.products = payload
+    },
+    PRODUCT (state, payload) {
+      state.product = payload
     },
     CATEGORIES (state, payload) {
       payload.forEach((item) => {
@@ -59,6 +72,7 @@ export default {
   // 取代 computed
   getters: {
     products: state => state.products,
+    product: state => state.product,
     categories: state => state.categories,
     filterProducts: (state) => {
       if (state.products) {

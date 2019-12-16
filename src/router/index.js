@@ -12,6 +12,7 @@ import Coupon from '@/components/pages/admin/Coupon'
 import FrontDashboard from '@/components/pages/Front/Dashboard'
 import ProductDetail from '@/components/pages/Front/ProductDetail'
 import Home from '@/components/pages/Front/Home'
+import CheckOut from '@/components/pages/Front/CheckOut'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -45,6 +46,11 @@ export default new VueRouter({
           path: 'ProductDetail/:productId',
           name: 'ProductDetail',
           component: ProductDetail
+        },
+        {
+          path: 'CheckOut',
+          name: 'CheckOut',
+          component: CheckOut
         }
       ]
     },

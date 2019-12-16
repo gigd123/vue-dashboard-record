@@ -119,7 +119,7 @@ export default {
     },
     getProductDetail (productId) {
       const vm = this
-      this.$store.dispatch('productsModule/getProduct', productId)
+      vm.$store.dispatch('productsModule/getProduct', productId)
       vm.$router.push({path: `/FrontDashboard/ProductDetail/${productId}`})
     },
     addToCart (id, qty = 1) {

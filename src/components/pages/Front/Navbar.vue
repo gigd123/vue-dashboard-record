@@ -51,9 +51,9 @@
               <div class="mr-2"></div>
               <div></div>
             </div> -->
-          <a class="dropdown-item text-center text-danger" href="#">直接去結帳</a>
+          <a class="dropdown-item text-center text-danger" href="#" @click.prevent="goToCheckOut">直接去結帳</a>
         </div>
-        <div class=" cartMenu" aria-labelledby="dropdownMenuLink"
+        <div class="cartMenu" aria-labelledby="dropdownMenuLink"
           v-else>
           <div class="dropdown-item">0 個商品</div>
         </div>
@@ -73,6 +73,9 @@ export default {
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModule/removeCartItem', id)
+    },
+    goToCheckOut () {
+      this.$router.push({path: '/FrontDashboard/CheckOut'})
     }
   },
   computed: {

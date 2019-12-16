@@ -34,6 +34,7 @@ export default {
       }
       context.commit('LOADINGITEM', id, {root: true})
       axios.post(api, {data: cart}).then((response) => {
+        console.log('response====', response)
         context.commit('LOADINGITEM', '', {root: true})
         context.dispatch('getCart')
       })

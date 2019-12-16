@@ -13,8 +13,20 @@
               <div class="col">現價：<span>{{ product.price }}</span></div>
             </div>
           </div>
-          <div class="p-2"><h5>數量</h5><input type="text"></div>
-          <div class="p-2"><button type="button" class="btn btn-danger">加入購物車</button></div>
+          <div class="p-2 d-flex">
+            <h5>數量</h5>
+            <a class="changeNum text-center" href="#" @click.prevent="addProductNum(-1)">
+              <i class="fas fa-minus"></i>
+            </a>
+            <input class="productNum text-center" type="text" v-model="productNum">
+            <a class="changeNum text-center" href="#" @click.prevent="addProductNum(1)">
+              <i class="fas fa-plus"></i>
+            </a>
+          </div>
+          <div class="p-2">
+            <button type="button" class="btn btn-danger"
+            @click="addToCart(product.id, productNum)">加入購物車</button>
+            </div>
         </div>
       </div>
     </div>
@@ -31,8 +43,34 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  data () {
+    return {
+      productNum: 1
+    }
+  },
   computed: {
     ...mapGetters('productsModule', ['product'])
+  },
+  methods: {
+    addToCart (id, qty) {
+      this.$store.dispatch('cartModule/addToCart', {id, qty})
+    },
+    addProductNum (num) {
+      this.productNum = this.productNum + num
+    }
   }
 }
 </script>
+
+<style>
+  .productNum {
+    width: 30px;
+    height: 30px;
+  }
+  .changeNum {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+  }
+</style>

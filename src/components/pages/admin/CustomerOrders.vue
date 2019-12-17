@@ -175,7 +175,7 @@
 
 <script>
 import $ from 'jquery'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -198,12 +198,10 @@ export default {
     }
   },
   computed: {
-    products () {
-      return this.$store.state.products
-    },
-    cart () {
-      return this.$store.state.cart
-    }
+    ...mapGetters({
+      cart: 'cartModule/cart',
+      products: 'productsModule/products'
+    })
   },
   methods: {
     ...mapActions(['getAllProducts']),

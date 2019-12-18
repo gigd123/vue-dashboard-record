@@ -38,14 +38,14 @@
             </tr>
           </tfoot>
         </table>
-        <!-- <div class="input-group mb-3 input-group-sm">
+        <div class="input-group mb-3 input-group-sm">
           <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
               套用優惠碼
             </button>
           </div>
-        </div> -->
+        </div>
         <div class="col"><button @click="step = 2">下一步</button></div>
       </div>
     </div>
@@ -170,11 +170,15 @@ export default {
       order: {
         user: {}
       },
-      orderId: ''
+      orderId: '',
+      coupon_code: ''
     }
   },
   computed: {
-    ...mapGetters('cartModule', ['cart'])
+    ...mapGetters({
+      cart: 'cartModule/cart',
+      product: 'productsModule/product'
+    })
   },
   methods: {
     createOrder () {
@@ -187,10 +191,12 @@ export default {
         if (result) {
           // do stuff if not valid
           this.$http.post(api, {data: order}).then((response) => {
+            this.orderId = response.data.orderId
             if (response.data.success) {
               vm.step = 3
             }
             this.$store.commit('LOADINGITEM', false)
+            this.getOrder()
           })
         } else {
           console.log('欄位不完整')
@@ -198,12 +204,13 @@ export default {
       })
     },
     getOrder () {
+      console.log('getOrder')
       const vm = this
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order/${vm.orderId}`
       vm.isLoading = true
       this.$http.get(api).then((response) => {
         vm.order = response.data.order
-        console.log('response====', response)
+        console.log('get order response====', response)
         vm.isLoading = false
       })
     },
@@ -212,17 +219,24 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/pay/${vm.orderId}`
       vm.isLoading = true
       this.$http.post(api).then((response) => {
-        console.log('response====', response)
+        console.log('pay order response====', response)
         if (response.data.success) {
           vm.getOrder()
         }
         vm.isLoading = false
       })
+    },
+    addCouponCode () {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon`
+      const vm = this
+      const coupon = {
+        code: vm.coupon_code
+      }
+      this.$http.post(api, {data: coupon}).then((response) => {
+        console.log('response====', response)
+        this.$store.dispatch('cartModule/getCart')
+      })
     }
-  },
-  created () {
-    this.orderId = this.$route.params.orderId
-    this.getOrder()
   }
 }
 </script>

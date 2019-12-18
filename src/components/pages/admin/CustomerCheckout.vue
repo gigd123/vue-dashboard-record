@@ -91,6 +91,7 @@ export default {
     }
   },
   created () {
+    console.log('this.$route.params====', this.$route.params)
     this.orderId = this.$route.params.orderId
     this.getOrder()
   }

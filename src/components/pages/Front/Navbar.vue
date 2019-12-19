@@ -6,14 +6,15 @@
     </button>
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active" v-for="(item, index) in categories" :key="index">
-          <a class="nav-link" href="#"
-            @click.prevent="searchText(item)"
-            v-if="item === 'M' | item === 'F' | item === 'C'">{{ item === 'M' ? '男士' : item === 'F' ? '女士' : '兒童'}}</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="#" @click.prevent="searchText('M')">男士</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">運動配件</a>
-        </li> -->
+        <li class="nav-item active">
+          <a class="nav-link" href="#" @click.prevent="searchText('F')">女士</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#" @click.prevent="searchText('CH')">兒童</a>
+        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -69,6 +70,7 @@ export default {
   methods: {
     searchText (text) {
       console.log(text)
+      this.$router.push('/FrontDashboard/Home')
       this.$store.commit('productsModule/SEARCH_TEXT', text)
     },
     removeCartItem (id) {

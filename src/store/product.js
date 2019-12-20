@@ -15,7 +15,7 @@ export default {
   },
   // 操作行為，如ajax，但是不用於操作資料狀態
   actions: {
-    getAllProducts (context, page = 1) {
+    getAllProducts (context, page) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`
       // 由於 LOADING 是屬於 global，必須加上 {root: true} 判斷為 global
       console.log('get products~~~!')
@@ -23,6 +23,7 @@ export default {
       // 由於這邊的 this 不是指向原本 vue 的元件，無法使用 this 直接去使用 $http中的 方法，必須另行導入 axios
       // this.$http.get(api).then((response) => {
       axios.get(api).then((response) => {
+        console.log('response=====', response)
         context.commit('PRODUCTS', response.data.products)
         context.commit('CATEGORIES', response.data.products)
         // vm.pagination = response.data.pagination
@@ -36,6 +37,10 @@ export default {
       // 由於這邊的 this 不是指向原本 vue 的元件，無法使用 this 直接去使用 $http中的 方法，必須另行導入 axios
       // this.$http.get(api).then((response) => {
       axios.get(api).then((response) => {
+        response.data.products.forEach((item) => {
+          let newCategory = item.category.split('/')
+          item.category = newCategory
+        })
         context.commit('PRODUCTS', response.data.products)
         context.commit('CATEGORIES', response.data.products)
         // vm.pagination = response.data.pagination
@@ -61,6 +66,7 @@ export default {
       state.product = payload
     },
     CATEGORIES (state, payload) {
+      console.log('payload===', payload)
       payload.forEach((item) => {
         state.categories.push(item.category)
       })
@@ -77,7 +83,8 @@ export default {
     filterProducts: (state) => {
       if (state.products) {
         return state.products.filter((item) => {
-          if (item.category === state.searchText) {
+          if (item.category.indexOf(state.searchText) !== -1) {
+            console.log('符合條件===', item)
             const data = item
             return data
           }

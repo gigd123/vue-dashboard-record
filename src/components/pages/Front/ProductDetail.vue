@@ -49,7 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('productsModule', ['product'])
+    ...mapGetters('productsModule', ['product', 'productId'])
   },
   methods: {
     addToCart (id, qty) {
@@ -58,6 +58,12 @@ export default {
     addProductNum (num) {
       this.productNum = this.productNum + num
     }
+  },
+  created () {
+    const strUrl = window.location.href
+    const urlArr = strUrl.split('/')
+    console.log('this===', urlArr)
+    this.$store.dispatch('productsModule/getProduct', urlArr[urlArr.length - 1])
   }
 }
 </script>

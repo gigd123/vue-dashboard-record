@@ -9,6 +9,7 @@ export default {
   state: {
     products: [],
     product: {},
+    productId: '',
     categories: [],
     searchText: '',
     filterProducts: []
@@ -65,6 +66,9 @@ export default {
     PRODUCT (state, payload) {
       state.product = payload
     },
+    PRODUCT_ID (state, payload) {
+      state.productId = payload
+    },
     CATEGORIES (state, payload) {
       console.log('payload===', payload)
       payload.forEach((item) => {
@@ -79,6 +83,7 @@ export default {
   getters: {
     products: state => state.products,
     product: state => state.product,
+    productId: state => state.productId,
     categories: state => state.categories,
     filterProducts: (state) => {
       if (state.products) {

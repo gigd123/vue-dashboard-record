@@ -166,14 +166,14 @@ export default {
           console.log('欄位不完整')
         }
       })
-    },
-    getUnique () {
-      const vm = this
-      vm.products.forEach((item) => {
-        vm.categories.push(item.category)
-      })
-      console.log('categories====', vm.categories)
     }
+    // getUnique () {
+    //   const vm = this
+    //   vm.products.forEach((item) => {
+    //     vm.categories.push(item.category)
+    //   })
+    //   console.log('categories====', vm.categories)
+    // }
   },
   created () {
     this.getClientAllProducts()

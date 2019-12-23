@@ -7,13 +7,16 @@
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('M')">男士</a>
+          <a class="nav-link" href="#" @click.prevent="searchText('m')">男士</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('F')">女士</a>
+          <a class="nav-link" href="#" @click.prevent="searchText('f')">女士</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('CH')">兒童</a>
+          <a class="nav-link" href="#" @click.prevent="searchText('kid')">兒童</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#" @click.prevent="searchText('acc')">運動配件</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -69,8 +72,10 @@ import { mapGetters } from 'vuex'
 export default {
   methods: {
     searchText (text) {
-      console.log(text)
-      this.$router.push('/FrontDashboard/Home')
+      const curUrl = window.location.href.split('/')
+      if (curUrl.indexOf('Home') === -1) {
+        this.$router.push('/FrontDashboard/Home')
+      }
       this.$store.commit('productsModule/SEARCH_TEXT', text)
     },
     removeCartItem (id) {

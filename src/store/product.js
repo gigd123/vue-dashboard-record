@@ -12,6 +12,7 @@ export default {
     productId: '',
     categories: [],
     searchText: '',
+    searchCategory: '',
     filterProducts: []
   },
   // 操作行為，如ajax，但是不用於操作資料狀態
@@ -77,6 +78,9 @@ export default {
     },
     SEARCH_TEXT (state, payload) {
       state.searchText = payload
+    },
+    SEARCH_CATEGORY (state, payload) {
+      state.searchCategory = payload
     }
   },
   // 取代 computed
@@ -89,7 +93,6 @@ export default {
       if (state.products) {
         return state.products.filter((item) => {
           if (item.category.indexOf(state.searchText) !== -1) {
-            console.log('符合條件===', item)
             const data = item
             return data
           }

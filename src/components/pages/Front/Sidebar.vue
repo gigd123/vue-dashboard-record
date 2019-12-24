@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   methods: {
     searchText (text) {
@@ -43,9 +41,6 @@ export default {
       }
       this.$store.commit('productsModule/SEARCH_TEXT', text)
     }
-  },
-  computed: {
-    ...mapGetters('productsModule', ['filterProducts'])
   }
 }
 </script>

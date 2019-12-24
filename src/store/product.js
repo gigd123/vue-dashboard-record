@@ -89,6 +89,8 @@ export default {
     product: state => state.product,
     productId: state => state.productId,
     categories: state => state.categories,
+    searchText: state => state.searchText,
+    searchCategory: state => state.searchCategory,
     filterProducts: (state) => {
       if (state.products) {
         return state.products.filter((item) => {

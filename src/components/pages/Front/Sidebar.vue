@@ -39,7 +39,7 @@ export default {
       if (curUrl.indexOf('Home') === -1) {
         this.$router.push('/FrontDashboard/Home')
       }
-      this.$store.commit('productsModule/SEARCH_TEXT', text)
+      this.$store.commit('productsModule/SEARCH_CATEGORY', text)
     }
   }
 }

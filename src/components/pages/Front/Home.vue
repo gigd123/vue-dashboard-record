@@ -22,7 +22,7 @@
       </a>
     </div> -->
     <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="item in subfilterProducts" :key="item.id">
+      <div class="col-md-4 mb-4" v-for="item in filterProducts" :key="item.id">
         <div class="card border-0 shadow-sm">
           <div style="height: 150px; background-size: cover; background-position: center"
             :style="{backgroundImage: `url(${item.imageUrl})`}">
@@ -102,19 +102,7 @@ export default {
       products: 'productsModule/products',
       filterProducts: 'productsModule/filterProducts',
       searchCategory: 'productsModule/searchCategory'
-    }),
-    subfilterProducts () {
-      const vm = this
-      console.log('searchCategory===', this.searchCategory)
-      return this.filterProducts.filter(item => {
-        if (item.category.indexOf(this.searchCategory) !== -1) {
-          console.log('item===', item)
-          const data = item
-          return data
-        }
-        vm.$store.commit('productsModule/SEARCH_CATEGORY', '')
-      })
-    }
+    })
   },
   methods: {
     ...mapActions('productsModule', ['getClientAllProducts']),

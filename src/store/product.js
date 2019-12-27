@@ -71,7 +71,6 @@ export default {
       state.productId = payload
     },
     CATEGORIES (state, payload) {
-      console.log('payload===', payload)
       payload.forEach((item) => {
         state.categories.push(item.category)
       })
@@ -95,12 +94,18 @@ export default {
       if (state.products) {
         return state.products.filter((item) => {
           if (item.category.indexOf(state.searchText) !== -1) {
-            const data = item
-            return data
+            if (state.searchCategory !== '') {
+              if (item.category.indexOf(state.searchCategory) !== -1) {
+                const data = item
+                return data
+              }
+            } else {
+              const data = item
+              return data
+            }
           }
         })
       }
-      return this.products
     }
   }
 }

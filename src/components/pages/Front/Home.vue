@@ -21,40 +21,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div> -->
-    <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="item in filterProducts" :key="item.id">
-        <div class="card border-0 shadow-sm">
-          <div style="height: 150px; background-size: cover; background-position: center"
-            :style="{backgroundImage: `url(${item.imageUrl})`}">
-          </div>
-          <div class="card-body">
-            <span class="badge badge-secondary float-right ml-2">{{item.category}}</span>
-            <h5 class="card-title">
-              <a href="#" class="text-dark">{{item.title}}</a>
-            </h5>
-            <p class="card-text">{{item.content}}</p>
-            <div class="d-flex justify-content-between align-items-baseline">
-              <!-- <div class="h5">2,800 元</div> -->
-              <del class="h6" v-if="!item.origin_price">{{item.origin_price}}</del>
-              <del class="h6" v-if="item.origin_price">{{item.origin_price}}</del>
-              <div class="h5" v-if="item.price">{{item.price}}</div>
-            </div>
-          </div>
-          <div class="card-footer d-flex">
-            <button type="button" class="btn btn-outline-secondary btn-sm"
-              @click="getProductDetail(item.id)">
-              <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
-              查看更多
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-sm ml-auto"
-              @click="addToCart(item.id)">
-              <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
-              加到購物車
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ProductList :products="filterProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
     <ProductModal :product="product" />
     <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
   </div>
@@ -62,15 +29,16 @@
 </template>
 
 <script>
-import $ from 'jquery'
 import Pagination from '../../common/Pagination'
 import ProductModal from '../../common/ProductModal'
+import ProductList from '../../common/ProductList.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Pagination,
-    ProductModal
+    ProductModal,
+    ProductList
   },
   data () {
     return {
@@ -100,8 +68,7 @@ export default {
     ...mapGetters({
       loadingItem: 'loadingItem',
       products: 'productsModule/products',
-      filterProducts: 'productsModule/filterProducts',
-      searchCategory: 'productsModule/searchCategory'
+      filterProducts: 'productsModule/filterProducts'
     })
   },
   methods: {
@@ -113,7 +80,6 @@ export default {
       this.$http.get(api).then((response) => {
         response.data.product.num = 1
         vm.product = response.data.product
-        $('#productModal').modal('show')
         this.$store.commit('LOADINGITEM', '')
       })
     },
@@ -123,57 +89,11 @@ export default {
       vm.$router.push({path: `/FrontDashboard/ProductDetail/${productId}`})
     },
     addToCart (id, qty = 1) {
-      this.$store.dispatch('addToCart', {id, qty})
-      // 待修正---------確認加入成功才關閉 modal
-      $('#productModal').modal('hide')
+      this.$store.dispatch('cartModule/addToCart', {id, qty})
     },
     getCart () {
       this.$store.dispatch('cartModule/getCart')
-    },
-    removeCartItem (id) {
-      this.$store.dispatch('removeCartItem', id)
-    },
-    addCouponCode () {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon`
-      const vm = this
-      const coupon = {
-        code: vm.coupon_code
-      }
-      vm.isLoading = true
-      this.$http.post(api, {data: coupon}).then((response) => {
-        console.log('response====', response)
-        vm.getCart()
-        vm.isLoading = false
-      })
-    },
-    createOrder () {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`
-      const vm = this
-      const order = vm.form
-      // vm.isLoading = true
-      this.$validator.validate().then((result) => {
-        console.log('result====', result)
-        if (result) {
-          // do stuff if not valid
-          this.$http.post(api, {data: order}).then((response) => {
-            console.log('訂單已建立====', response)
-            if (response.data.success) {
-              vm.$router.push(`/customer_checkout/${response.data.orderId}`)
-            }
-            vm.isLoading = false
-          })
-        } else {
-          console.log('欄位不完整')
-        }
-      })
     }
-    // getUnique () {
-    //   const vm = this
-    //   vm.products.forEach((item) => {
-    //     vm.categories.push(item.category)
-    //   })
-    //   console.log('categories====', vm.categories)
-    // }
   },
   created () {
     this.getClientAllProducts()

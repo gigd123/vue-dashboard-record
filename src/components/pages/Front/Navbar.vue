@@ -9,6 +9,11 @@
         <li class="nav-item active">
           <a class="nav-link" href="#" @click.prevent="searchText('m')">男士</a>
         </li>
+        <!-- <li class="nav-item">
+            <router-link class="nav-link active" to="/FrontDashboard/Male">
+            男士
+            </router-link>
+        </li> -->
         <li class="nav-item active">
           <a class="nav-link" href="#" @click.prevent="searchText('f')">女士</a>
         </li>
@@ -76,6 +81,7 @@ export default {
       if (curUrl.indexOf('Home') === -1) {
         this.$router.push('/FrontDashboard/Home')
       }
+      this.$store.commit('productsModule/SEARCH_CATEGORY', '')
       this.$store.commit('productsModule/SEARCH_TEXT', text)
     },
     removeCartItem (id) {

@@ -32,14 +32,23 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
+  computed: {
+    ...mapGetters({
+      isLoading: 'isLoading'
+    })
+  },
   methods: {
     searchText (text) {
+      this.$store.dispatch('updateLoading', true)
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')
       }
       this.$store.commit('productsModule/SEARCH_CATEGORY', text)
+      this.$store.dispatch('updateLoading', false)
     }
   }
 }

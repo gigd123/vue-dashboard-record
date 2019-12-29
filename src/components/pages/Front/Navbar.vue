@@ -75,12 +75,14 @@ import { mapGetters } from 'vuex'
 export default {
   methods: {
     searchText (text) {
+      this.$store.commit('LOADING', true)
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')
       }
       this.$store.commit('productsModule/SEARCH_CATEGORY', '')
       this.$store.commit('productsModule/SEARCH_TEXT', text)
+      this.$store.commit('LOADING', false)
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModule/removeCartItem', id)
@@ -91,6 +93,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      isLoading: 'isLoading',
       categories: 'productsModule/categories',
       cart: 'cartModule/cart',
       cartsLen: 'cartModule/cartsLen'

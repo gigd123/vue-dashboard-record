@@ -51,11 +51,11 @@ export default {
     },
     getProduct (context, id) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
-      // this.$store.commit('LOADINGITEM', id)
+      context.commit('LOADING', true, {root: true})
       axios.get(api).then((response) => {
         response.data.product.num = 1
         context.commit('PRODUCT', response.data.product)
-        // this.$store.commit('LOADINGITEM', '')
+        context.commit('LOADING', false, {root: true})
       })
     }
   },

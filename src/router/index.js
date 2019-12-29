@@ -85,7 +85,7 @@ export default new VueRouter({
     },
     {
       name: 'Dashboard',
-      path: '/',
+      path: '/Dashboard',
       component: Dashboard,
       children: [
         {

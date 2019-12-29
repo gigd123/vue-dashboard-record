@@ -51,7 +51,8 @@ export default {
     },
     ...mapGetters({
       loadingItem: 'loadingItem',
-      products: 'productsModule/products'
+      products: 'productsModule/products',
+      product: 'productsModule/product'
     })
   },
   methods: {

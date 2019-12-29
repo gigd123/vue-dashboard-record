@@ -1,5 +1,8 @@
 <template>
-  <div class="card mb-3 p-3">
+  <div class="row">
+    <Sidebar />
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
+      <div class="card mb-3 p-3">
     <div class="row no-gutters">
       <div class="col-md-4">
         <img :src="product.imageUrl" class="card-img" alt="">
@@ -37,12 +40,18 @@
       <p class="card-text">{{ product.content }}</p>
     </div>
   </div>
+    </main>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Sidebar from './Sidebar'
 
 export default {
+  components: {
+    Sidebar
+  },
   data () {
     return {
       productNum: 1

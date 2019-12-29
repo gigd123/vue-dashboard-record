@@ -1,34 +1,17 @@
 <template>
-  <div class="row pt-5 pl-3 pr-3">
-    <!-- <div id="carouselExampleControls" class="carousel slide pt-3 h-75" data-ride="carousel">
-      <div class="carousel-inner h-75">
-        <div class="carousel-item active">
-          <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
-        </div>
-        <div class="carousel-item">
-          <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
-        </div>
-        <div class="carousel-item">
-          <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div> -->
-    <ProductList :products="products" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
-    <ProductModal :product="product" />
-    <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
+  <div class="row">
+    <Sidebar />
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
+      <ProductList :products="filterProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
+      <ProductModal :product="product" />
+      <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
+    </main>
   </div>
 
 </template>
 
 <script>
+import Sidebar from './Sidebar'
 import Pagination from '../../common/Pagination'
 import ProductModal from '../../common/ProductModal'
 import ProductList from '../../common/ProductList.vue'
@@ -36,6 +19,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
+    Sidebar,
     Pagination,
     ProductModal,
     ProductList
@@ -51,7 +35,8 @@ export default {
     },
     ...mapGetters({
       loadingItem: 'loadingItem',
-      products: 'productsModule/products'
+      products: 'productsModule/products',
+      filterProducts: 'productsModule/filterProducts'
     })
   },
   methods: {

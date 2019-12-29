@@ -36,8 +36,8 @@ export default {
   methods: {
     searchText (text) {
       const curUrl = window.location.href.split('/')
-      if (curUrl.indexOf('Home') === -1) {
-        this.$router.push('/FrontDashboard/Home')
+      if (curUrl.indexOf('ProductSort') === -1) {
+        this.$router.push('/FrontDashboard/ProductSort')
       }
       this.$store.commit('productsModule/SEARCH_CATEGORY', text)
     }

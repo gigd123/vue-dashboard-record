@@ -6,21 +6,19 @@
     </button>
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <router-link class="nav-link" to="/FrontDashboard/Home">
+            首頁
+        </router-link>
+        <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchText('m')">男士</a>
         </li>
-        <!-- <li class="nav-item">
-            <router-link class="nav-link active" to="/FrontDashboard/Male">
-            男士
-            </router-link>
-        </li> -->
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchText('f')">女士</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchText('kid')">兒童</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchText('acc')">運動配件</a>
         </li>
       </ul>
@@ -78,8 +76,8 @@ export default {
   methods: {
     searchText (text) {
       const curUrl = window.location.href.split('/')
-      if (curUrl.indexOf('Home') === -1) {
-        this.$router.push('/FrontDashboard/Home')
+      if (curUrl.indexOf('ProductSort') === -1) {
+        this.$router.push('/FrontDashboard/ProductSort')
       }
       this.$store.commit('productsModule/SEARCH_CATEGORY', '')
       this.$store.commit('productsModule/SEARCH_TEXT', text)

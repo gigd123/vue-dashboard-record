@@ -13,6 +13,7 @@ import FrontDashboard from '@/components/pages/Front/Dashboard'
 import ProductDetail from '@/components/pages/Front/ProductDetail'
 import Home from '@/components/pages/Front/Home'
 import CheckOut from '@/components/pages/Front/CheckOut'
+import ProductSort from '@/components/pages/Front/ProductSort'
 
 // 啟用Vue Router
 Vue.use(VueRouter)
@@ -25,12 +26,6 @@ export default new VueRouter({
       path: '*/',
       redirect: 'Login'
     },
-    // {
-    //   name: 'HelloWorld',
-    //   path: '/',
-    //   component: HelloWorld,
-    //   meta: { requiresAuth: true }
-    // },
     {
       name: 'FrontDashboard', // 元件呈現的名稱
       path: '/FrontDashboard', // 對應的虛擬路徑
@@ -41,6 +36,11 @@ export default new VueRouter({
           path: 'Home',
           name: 'Home',
           component: Home
+        },
+        {
+          path: 'ProductSort',
+          name: 'ProductSort',
+          component: ProductSort
         },
         {
           path: 'ProductDetail/:productId',

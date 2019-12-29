@@ -24,7 +24,7 @@ export default new VueRouter({
     {
       // 非定義的路徑導向 Login
       path: '*/',
-      redirect: 'Login'
+      redirect: '/FrontDashboard/Home'
     },
     {
       name: 'FrontDashboard', // 元件呈現的名稱

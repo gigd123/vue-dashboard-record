@@ -42,11 +42,11 @@ export default {
   },
   methods: {
     searchText (text) {
-      this.$store.dispatch('updateLoading', true)
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')
       }
+      this.$store.dispatch('updateLoading', true)
       this.$store.commit('productsModule/SEARCH_CATEGORY', text)
       this.$store.dispatch('updateLoading', false)
     }

@@ -1,7 +1,12 @@
 <template>
-  <div>
+  <div class="pt-5">
+    <div class="row pt-5">
+      <div class="col">1.確認購物清單</div>
+      <div class="col">2.填寫資料</div>
+      <div class="col">3.金流付款</div>
+    </div>
     <div class="my-5 row justify-content-center" v-if="step === 1 && cart.carts">
-      <div class="my-5 row justify-content-center w-75">
+      <div class="my-5 row justify-content-center w-75 pb-2">
         <table class="table">
           <thead>
             <th>商品資訊</th>
@@ -50,7 +55,7 @@
       </div>
     </div>
     <div class="my-5 row justify-content-center" v-if="step === 2">
-      <form class="col-md-6" @submit.prevent="createOrder">
+      <form class="col-md-6 pb-2" @submit.prevent="createOrder">
         <div class="form-group">
           <label for="useremail">Email</label>
           <input type="email" class="form-control" name="email" id="useremail"
@@ -92,6 +97,9 @@
           <button class="btn btn-danger">送出訂單</button>
         </div>
       </form>
+      <div class="col-12 d-flex">
+        <div class="col-6 d-flex justify-content-center"><button @click="step = 1">上一步</button></div>
+      </div>
     </div>
     <div class="my-5 row justify-content-center" v-if="step === 3">
       <form class="col-md-6" @submit.prevent="payOrder">

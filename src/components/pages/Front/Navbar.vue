@@ -75,14 +75,14 @@ import { mapGetters } from 'vuex'
 export default {
   methods: {
     searchText (text) {
-      this.$store.commit('LOADING', true)
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')
       }
+      this.$store.dispatch('updateLoading', true)
       this.$store.commit('productsModule/SEARCH_CATEGORY', '')
       this.$store.commit('productsModule/SEARCH_TEXT', text)
-      this.$store.commit('LOADING', false)
+      this.$store.dispatch('updateLoading', false)
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModule/removeCartItem', id)

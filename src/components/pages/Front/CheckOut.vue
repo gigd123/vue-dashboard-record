@@ -1,11 +1,23 @@
 <template>
   <div class="pt-5">
-    <div class="row pt-5">
-      <div class="col">1.確認購物清單</div>
-      <div class="col">2.填寫資料</div>
-      <div class="col">3.金流付款</div>
-    </div>
-    <div class="my-5 row justify-content-center" v-if="step === 1 && cart.carts">
+    <ul class="checkStep row pt-5 m-auto justify-content-center">
+      <li class="step">
+        <div class="step_circle m-auto border border-primary rounded-circle"
+        :class="{'bg-primary': step === 1, 'text-white':  step === 1}">1</div>
+        <p>確認購物清單</p>
+      </li>
+      <li class="step">
+        <div class="step_circle m-auto border border-primary rounded-circle"
+        :class="{'bg-primary': step === 2, 'text-white':  step === 2}">2</div>
+        <p>填寫資料</p>
+      </li>
+      <li class="step">
+        <div class="step_circle m-auto border border-primary rounded-circle"
+        :class="{'bg-primary': step === 3, 'text-white':  step === 3}">3</div>
+        <p>金流付款</p>
+      </li>
+    </ul>
+    <div class="row justify-content-center" v-if="step === 1 && cart.carts">
       <div class="my-5 row justify-content-center w-75 pb-2">
         <table class="table">
           <thead>
@@ -54,7 +66,7 @@
         <div class="col"><button @click="step = 2">下一步</button></div>
       </div>
     </div>
-    <div class="my-5 row justify-content-center" v-if="step === 2">
+    <div class="row justify-content-center" v-if="step === 2">
       <form class="col-md-6 pb-2" @submit.prevent="createOrder">
         <div class="form-group">
           <label for="useremail">Email</label>
@@ -101,7 +113,7 @@
         <div class="col-6 d-flex justify-content-center"><button @click="step = 1">上一步</button></div>
       </div>
     </div>
-    <div class="my-5 row justify-content-center" v-if="step === 3">
+    <div class="row justify-content-center" v-if="step === 3">
       <form class="col-md-6" @submit.prevent="payOrder">
         <table class="table">
           <thead>
@@ -248,3 +260,22 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import "./../../../assets/all.scss";
+  .checkStep {
+    max-width: 1200px;
+    list-style: none;
+    .step {
+      width: 250px;
+      height: 100px;
+      line-height: 50px;
+      text-align: center;
+      .step_circle {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+      }
+    }
+  }
+</style>

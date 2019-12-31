@@ -172,7 +172,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -201,6 +201,7 @@ export default {
     })
   },
   methods: {
+    ...mapActions('cartModule', ['getCart']),
     createOrder () {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`
       const vm = this
@@ -257,6 +258,9 @@ export default {
         this.$store.dispatch('cartModule/getCart')
       })
     }
+  },
+  created () {
+    this.getCart()
   }
 }
 </script>

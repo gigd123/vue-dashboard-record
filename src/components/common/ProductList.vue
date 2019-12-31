@@ -23,8 +23,7 @@
               @click="getProductDetail(item.id)">
               查看更多
             </button>
-            <button type="button" class="btn btn-outline-danger btn-sm ml-auto"
-              @click="addToCart(item.id)">
+            <button type="button" class="btn btn-outline-danger btn-sm ml-auto" @click="addToCart(item.id)">
               <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
               加到購物車
             </button>

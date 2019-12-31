@@ -28,6 +28,7 @@
           </div>
           <div class="p-2">
             <button type="button" class="btn btn-danger"
+            :disabled="!!isLoading"
             @click="addToCart(product.id, productNum)">加入購物車</button>
             </div>
         </div>
@@ -45,7 +46,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Sidebar from './Sidebar'
 
 export default {
@@ -58,9 +59,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('productsModule', ['product', 'productId'])
+    ...mapGetters({
+      isLoading: 'isLoading',
+      product: 'productsModule/product',
+      productId: 'productsModule/productId'
+    })
   },
   methods: {
+    ...mapActions('cartModule', ['getCart']),
     addToCart (id, qty) {
       this.$store.dispatch('cartModule/addToCart', {id, qty})
     },
@@ -73,6 +79,7 @@ export default {
     const urlArr = strUrl.split('/')
     console.log('this===', urlArr)
     this.$store.dispatch('productsModule/getProduct', urlArr[urlArr.length - 1])
+    this.getCart()
   }
 }
 </script>

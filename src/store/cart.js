@@ -12,6 +12,7 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`
       context.commit('LOADING', true, {root: true})
       axios.get(api).then((response) => {
+        console.log('getcart====', response)
         context.commit('CART', response.data.data)
         context.commit('CART_LEN', response.data.data.carts.length)
         context.commit('LOADING', false, {root: true})
@@ -32,10 +33,12 @@ export default {
         product_id: id,
         qty
       }
+      context.commit('LOADING', true, {root: true})
       context.commit('LOADINGITEM', id, {root: true})
       axios.post(api, {data: cart}).then((response) => {
         console.log('response====', response)
         context.commit('LOADINGITEM', '', {root: true})
+        context.commit('LOADING', false, {root: true})
         context.dispatch('getCart')
       })
     }

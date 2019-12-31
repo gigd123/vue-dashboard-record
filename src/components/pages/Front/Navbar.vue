@@ -31,8 +31,8 @@
           <i class="fas fa-shopping-cart text-white"></i>
         </a>
         <div class="cartNumber bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
-        <div class="dropdown-menu cartMenu" aria-labelledby="dropdownMenuLink"
-          v-if="cart.carts">
+        <div class="dropdown-menu cartMenu" aria-labelledby="dropdownMenuLink">
+          <div v-if="cartsLen !== 0">
             <table class="table">
               <thead>
                 <th>品名</th>
@@ -44,7 +44,7 @@
               <tr v-for="cart in cart.carts" :key="cart.id">
                 <td>{{cart.product.title}}</td>
                 <td></td>
-                <td>{{cart.product.num}}</td>
+                <td>{{cart.product.qty}}</td>
                 <td>
                   <button type="button" class="btn btn-outline-danger btn-sm"
                   @click="removeCartItem(cart.id)">
@@ -58,11 +58,12 @@
               <div class="mr-2"></div>
               <div></div>
             </div> -->
-          <a class="dropdown-item text-center text-danger" href="#" @click.prevent="goToCheckOut">直接去結帳</a>
-        </div>
-        <div class="cartMenu" aria-labelledby="dropdownMenuLink"
+            <a class="dropdown-item text-center text-danger" href="#" @click.prevent="goToCheckOut">直接去結帳</a>
+          </div>
+          <div class="cartMenu" aria-labelledby="dropdownMenuLink"
           v-else>
           <div class="dropdown-item">0 個商品</div>
+        </div>
         </div>
       </div>
     </div>
@@ -95,6 +96,7 @@ export default {
     ...mapGetters({
       isLoading: 'isLoading',
       categories: 'productsModule/categories',
+      getCart: 'cartModule/getCart',
       cart: 'cartModule/cart',
       cartsLen: 'cartModule/cartsLen'
     })
@@ -103,7 +105,7 @@ export default {
 </script>
 
 <style>
-  @import url("@fortawesome/fontawesome-free/css/all.css");
+  /* @import url("@fortawesome/fontawesome-free/css/all.css"); */
   .cartMenu {
     left: unset;
     right: 0;

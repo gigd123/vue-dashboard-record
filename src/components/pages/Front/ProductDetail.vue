@@ -16,7 +16,34 @@
               <div class="col">現價：<span>{{ product.price }}</span></div>
             </div>
           </div>
-          <div class="p-2 d-flex">
+          <div class="p-2">
+            <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary">
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'S'"
+              :class="{'border-primary bg-primary': productSize === 'S'}">
+                <a href="#" :class="{'text-white': productSize === 'S'}">S</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'M'"
+              :class="{'border-primary bg-primary': productSize === 'M'}">
+                <a href="#" :class="{'text-white': productSize === 'M'}">M</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'L'"
+              :class="{'border-primary bg-primary': productSize === 'L'}">
+                <a href="#" :class="{'text-white': productSize === 'L'}">L</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'XL'"
+              :class="{'border-primary bg-primary': productSize === 'XL'}">
+                <a href="#" :class="{'text-white': productSize === 'XL'}">XL</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'XXL'"
+              :class="{'border-primary bg-primary': productSize === 'XXL'}">
+                <a href="#" :class="{'text-white': productSize === 'XXL'}">XXL</a>
+              </li>
+            </ul>
             <h5>數量</h5>
             <a class="changeNum text-center" href="#" @click.prevent="addProductNum(-1)">
               <i class="fas fa-minus"></i>
@@ -29,7 +56,7 @@
           <div class="p-2">
             <button type="button" class="btn btn-danger"
             :disabled="!!isLoading"
-            @click="addToCart(product.id, productNum)">加入購物車</button>
+            @click="addToCart(product.id, {productNum, productSize})">加入購物車</button>
             </div>
         </div>
       </div>
@@ -55,6 +82,7 @@ export default {
   },
   data () {
     return {
+      productSize: 'S',
       productNum: 1
     }
   },
@@ -67,7 +95,7 @@ export default {
   },
   methods: {
     ...mapActions('cartModule', ['getCart']),
-    addToCart (id, qty) {
+    addToCart (id, {qty, size}) {
       this.$store.dispatch('cartModule/addToCart', {id, qty})
     },
     addProductNum (num) {
@@ -84,7 +112,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .productNum {
     width: 30px;
     height: 30px;
@@ -94,5 +122,19 @@ export default {
     height: 30px;
     width: 30px;
     cursor: pointer;
+  }
+  .productSize {
+    width: 250px;
+    list-style: none;
+    li {
+      cursor: pointer;
+      width: 40px;
+      height: 20px;
+      line-height: 1.5;
+      font-size: 12px;
+      a {
+        text-decoration: none;
+      }
+    }
   }
 </style>

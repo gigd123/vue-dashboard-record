@@ -43,8 +43,8 @@
               <tbody>
               <tr v-for="cart in cart.carts" :key="cart.id">
                 <td>{{cart.product.title}}</td>
-                <td></td>
-                <td>{{cart.product.qty}}</td>
+                <td>{{cart.size}}</td>
+                <td>{{cart.qty}}</td>
                 <td>
                   <button type="button" class="btn btn-outline-danger btn-sm"
                   @click="removeCartItem(cart.id)">

@@ -14,6 +14,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="#" @click.prevent="searchText('swimwear')">泳裝</a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#" @click.prevent="searchText('shoes')">鞋子</a>
+        </li>
       </ul>
     </div>
   </nav>

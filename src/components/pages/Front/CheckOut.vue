@@ -22,6 +22,7 @@
         <table class="table">
           <thead>
             <th>商品資訊</th>
+            <th>尺寸</th>
             <th>數量</th>
             <th>單價</th>
             <th>刪除</th>
@@ -34,6 +35,7 @@
                   已套用優惠券
                 </div>
               </td>
+              <td class="align-middle">{{ item.size }}</td>
               <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
               <td class="align-middle text-right">{{ item.final_total }}</td>
               <td class="align-middle">

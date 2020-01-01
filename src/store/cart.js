@@ -27,11 +27,12 @@ export default {
       })
     },
     // 在傳參數進入 action 時候，一次只能傳入一個參數 (context, id, qty = 1)， qty 會變成 undefined
-    addToCart (context, {id, qty}) {
+    addToCart (context, {id, qty, size}) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`
       const cart = {
         product_id: id,
-        qty
+        qty,
+        size
       }
       context.commit('LOADING', true, {root: true})
       context.commit('LOADINGITEM', id, {root: true})

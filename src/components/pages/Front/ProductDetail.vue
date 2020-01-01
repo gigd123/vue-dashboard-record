@@ -17,7 +17,8 @@
             </div>
           </div>
           <div class="p-2">
-            <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary">
+            <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary"
+            v-if="categories.indexOf(('tops' || 'pants' || 'jackets' || 'swimwear')) === -1">
               <li class="border border-secondary"
               @click.prevent="productSize = 'S'"
               :class="{'border-primary bg-primary': productSize === 'S'}">
@@ -44,6 +45,39 @@
                 <a href="#" :class="{'text-white': productSize === 'XXL'}">XXL</a>
               </li>
             </ul>
+            <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary"
+            v-if="categories.indexOf('shoes') === -1">
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'S'"
+              :class="{'border-primary bg-primary': productSize === '36-37'}">
+                <a href="#" :class="{'text-white': productSize === '36-37'}">36-37</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'M'"
+              :class="{'border-primary bg-primary': productSize === 'M'}">
+                <a href="#" :class="{'text-white': productSize === 'M'}">38-39</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'L'"
+              :class="{'border-primary bg-primary': productSize === '40-41'}">
+                <a href="#" :class="{'text-white': productSize === '40-41'}">40-41</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'XL'"
+              :class="{'border-primary bg-primary': productSize === '42-43'}">
+                <a href="#" :class="{'text-white': productSize === '42-43'}">42-43</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'XXL'"
+              :class="{'border-primary bg-primary': productSize === '44-45'}">
+                <a href="#" :class="{'text-white': productSize === '44-45'}">44-45</a>
+              </li>
+              <li class="border border-secondary"
+              @click.prevent="productSize = 'XXL'"
+              :class="{'border-primary bg-primary': productSize === '46-47'}">
+                <a href="#" :class="{'text-white': productSize === '46-47'}">46-47</a>
+              </li>
+            </ul>
             <h5>數量</h5>
             <a class="changeNum text-center" href="#" @click.prevent="addProductNum(-1)">
               <i class="fas fa-minus"></i>
@@ -56,7 +90,7 @@
           <div class="p-2">
             <button type="button" class="btn btn-danger"
             :disabled="!!isLoading"
-            @click="addToCart(product.id, {productNum, productSize})">加入購物車</button>
+            @click="addToCart(product.id, productNum, productSize)">加入購物車</button>
             </div>
         </div>
       </div>
@@ -90,13 +124,14 @@ export default {
     ...mapGetters({
       isLoading: 'isLoading',
       product: 'productsModule/product',
-      productId: 'productsModule/productId'
+      productId: 'productsModule/productId',
+      categories: 'productsModule/categories'
     })
   },
   methods: {
     ...mapActions('cartModule', ['getCart']),
-    addToCart (id, {qty, size}) {
-      this.$store.dispatch('cartModule/addToCart', {id, qty})
+    addToCart (id, qty, size) {
+      this.$store.dispatch('cartModule/addToCart', {id, qty, size})
     },
     addProductNum (num) {
       this.productNum = this.productNum + num
@@ -105,7 +140,6 @@ export default {
   created () {
     const strUrl = window.location.href
     const urlArr = strUrl.split('/')
-    console.log('this===', urlArr)
     this.$store.dispatch('productsModule/getProduct', urlArr[urlArr.length - 1])
     this.getCart()
   }

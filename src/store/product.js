@@ -98,6 +98,11 @@ export default {
     filterProducts: (state) => {
       if (state.products) {
         return state.products.filter((item) => {
+          console.log(state.searchText)
+          if (state.searchText !== '' && item.title.indexOf(state.searchText) !== -1) {
+            const data = item
+            return data
+          }
           if (item.category.indexOf(state.searchCat) !== -1) {
             if (state.searchSubCat !== '') {
               if (item.category.indexOf(state.searchSubCat) !== -1) {

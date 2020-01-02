@@ -91,6 +91,7 @@ export default {
       this.$store.dispatch('updateLoading', false)
     },
     search (text) {
+      console.log(text)
       this.$store.commit('productsModule/SEARCH_TEXT', text)
     },
     removeCartItem (id) {

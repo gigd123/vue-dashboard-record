@@ -12,7 +12,8 @@ export default {
     productId: '',
     categories: [],
     searchText: '',
-    searchCategory: '',
+    searchCat: '',
+    searchSubCat: '',
     filterProducts: []
   },
   // 操作行為，如ajax，但是不用於操作資料狀態
@@ -78,8 +79,11 @@ export default {
     SEARCH_TEXT (state, payload) {
       state.searchText = payload
     },
-    SEARCH_CATEGORY (state, payload) {
-      state.searchCategory = payload
+    SEARCH_CAT (state, payload) {
+      state.searchCat = payload
+    },
+    SEARCH_SUBCAT (state, payload) {
+      state.searchSubCat = payload
     }
   },
   // 取代 computed
@@ -89,13 +93,14 @@ export default {
     productId: state => state.productId,
     categories: state => state.categories,
     searchText: state => state.searchText,
-    searchCategory: state => state.searchCategory,
+    searchCat: state => state.searchCat,
+    searchSubCat: state => state.searchSubCat,
     filterProducts: (state) => {
       if (state.products) {
         return state.products.filter((item) => {
-          if (item.category.indexOf(state.searchText) !== -1) {
-            if (state.searchCategory !== '') {
-              if (item.category.indexOf(state.searchCategory) !== -1) {
+          if (item.category.indexOf(state.searchCat) !== -1) {
+            if (state.searchSubCat !== '') {
+              if (item.category.indexOf(state.searchSubCat) !== -1) {
                 const data = item
                 return data
               }

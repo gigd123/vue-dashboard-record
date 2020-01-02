@@ -10,21 +10,21 @@
             首頁
         </router-link>
         <li class="nav-item">
-          <a class="nav-link" href="#" @click.prevent="searchText('m')">男士</a>
+          <a class="nav-link" href="#" @click.prevent="searchCat('m')">男士</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" @click.prevent="searchText('f')">女士</a>
+          <a class="nav-link" href="#" @click.prevent="searchCat('f')">女士</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" @click.prevent="searchText('kid')">兒童</a>
+          <a class="nav-link" href="#" @click.prevent="searchCat('kid')">兒童</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" @click.prevent="searchText('acc')">運動配件</a>
+          <a class="nav-link" href="#" @click.prevent="searchCat('acc')">運動配件</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchText">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search(searchText)">搜尋</button>
       </form>
       <div class="cart dropdown ml-2">
         <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,16 +74,24 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  data () {
+    return {
+      searchText: ''
+    }
+  },
   methods: {
-    searchText (text) {
+    searchCat (text) {
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')
       }
       this.$store.dispatch('updateLoading', true)
-      this.$store.commit('productsModule/SEARCH_CATEGORY', '')
-      this.$store.commit('productsModule/SEARCH_TEXT', text)
+      this.$store.commit('productsModule/SEARCH_SUBCAT', '')
+      this.$store.commit('productsModule/SEARCH_CAT', text)
       this.$store.dispatch('updateLoading', false)
+    },
+    search (text) {
+      this.$store.commit('productsModule/SEARCH_TEXT', text)
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModule/removeCartItem', id)

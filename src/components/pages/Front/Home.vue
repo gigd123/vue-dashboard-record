@@ -22,7 +22,6 @@
       </a>
     </div> -->
     <ProductList :products="products" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
-    <ProductModal :product="product" />
     <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
   </div>
 
@@ -30,14 +29,12 @@
 
 <script>
 import Pagination from '../../common/Pagination'
-import ProductModal from '../../common/ProductModal'
 import ProductList from '../../common/ProductList.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Pagination,
-    ProductModal,
     ProductList
   },
   data () {

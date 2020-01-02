@@ -3,19 +3,19 @@
     <div class="sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('tops')">運動上衣</a>
+          <a class="nav-link" href="#" @click.prevent="searchSubCat('tops')">運動上衣</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('pants')">運動褲</a>
+          <a class="nav-link" href="#" @click.prevent="searchSubCat('pants')">運動褲</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('jackets')">運動外套</a>
+          <a class="nav-link" href="#" @click.prevent="searchSubCat('jackets')">運動外套</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('swimwear')">泳裝</a>
+          <a class="nav-link" href="#" @click.prevent="searchSubCat('swimwear')">泳裝</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#" @click.prevent="searchText('shoes')">鞋子</a>
+          <a class="nav-link" href="#" @click.prevent="searchSubCat('shoes')">鞋子</a>
         </li>
       </ul>
     </div>
@@ -32,13 +32,13 @@ export default {
     })
   },
   methods: {
-    searchText (text) {
+    searchSubCat (text) {
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')
       }
       this.$store.dispatch('updateLoading', true)
-      this.$store.commit('productsModule/SEARCH_CATEGORY', text)
+      this.$store.commit('productsModule/SEARCH_SUBCAT', text)
       this.$store.dispatch('updateLoading', false)
     }
   }

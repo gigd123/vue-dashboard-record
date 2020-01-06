@@ -21,7 +21,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div> -->
-    <ProductList :products="products" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
+    <ProductList :products="searchProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
     <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
   </div>
 
@@ -48,7 +48,7 @@ export default {
     },
     ...mapGetters({
       loadingItem: 'loadingItem',
-      products: 'productsModule/products',
+      searchProducts: 'productsModule/searchProducts',
       product: 'productsModule/product'
     })
   },

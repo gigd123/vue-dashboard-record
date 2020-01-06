@@ -91,7 +91,10 @@ export default {
       this.$store.dispatch('updateLoading', false)
     },
     search (text) {
-      console.log(text)
+      const curUrl = window.location.href.split('/')
+      if (curUrl.indexOf('Home') === -1) {
+        this.$router.push('/FrontDashboard/Home')
+      }
       this.$store.commit('productsModule/SEARCH_TEXT', text)
     },
     removeCartItem (id) {

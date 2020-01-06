@@ -77,6 +77,7 @@ export default {
       })
     },
     SEARCH_TEXT (state, payload) {
+      console.log('payload', payload)
       state.searchText = payload
     },
     SEARCH_CAT (state, payload) {
@@ -95,14 +96,18 @@ export default {
     searchText: state => state.searchText,
     searchCat: state => state.searchCat,
     searchSubCat: state => state.searchSubCat,
+    searchProducts: (state) => {
+      return state.products.filter(item => {
+        if (item.title.indexOf(state.searchText) !== -1) {
+          console.log('searchText===', state.searchText)
+          const data = item
+          return data
+        }
+      })
+    },
     filterProducts: (state) => {
       if (state.products) {
         return state.products.filter((item) => {
-          console.log(state.searchText)
-          if (state.searchText !== '' && item.title.indexOf(state.searchText) !== -1) {
-            const data = item
-            return data
-          }
           if (item.category.indexOf(state.searchCat) !== -1) {
             if (state.searchSubCat !== '') {
               if (item.category.indexOf(state.searchSubCat) !== -1) {

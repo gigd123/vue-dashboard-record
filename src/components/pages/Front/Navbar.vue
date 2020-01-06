@@ -6,9 +6,12 @@
     </button>
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <router-link class="nav-link" to="/FrontDashboard/Home">
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click.prevent="goToHome">首頁</a>
+        </li>
+        <!-- <router-link class="nav-link" to="/FrontDashboard/Home">
             首頁
-        </router-link>
+        </router-link> -->
         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchCat('m')">男士</a>
         </li>
@@ -102,6 +105,14 @@ export default {
     },
     goToCheckOut () {
       this.$router.push({path: '/FrontDashboard/CheckOut'})
+    },
+    goToHome () {
+      const curUrl = window.location.href.split('/')
+      if (curUrl.indexOf('Home') === -1) {
+        this.$router.push('/FrontDashboard/Home')
+      }
+      this.searchText = ''
+      this.$store.commit('productsModule/SEARCH_TEXT', '')
     }
   },
   computed: {

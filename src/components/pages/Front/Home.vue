@@ -21,8 +21,9 @@
         <span class="sr-only">Next</span>
       </a>
     </div> -->
-    <ProductList :products="searchProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
-    <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
+    <ProductList v-if="searchProducts.length > 0" :products="searchProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
+    <NoResults v-else />
+    <Pagination v-if="searchProducts.length > 0" :pagination="pagination" @switchPagination="getClientAllProducts"/>
   </div>
 
 </template>
@@ -30,12 +31,14 @@
 <script>
 import Pagination from '../../common/Pagination'
 import ProductList from '../../common/ProductList.vue'
+import NoResults from '../../common/NoResults.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Pagination,
-    ProductList
+    ProductList,
+    NoResults
   },
   data () {
     return {

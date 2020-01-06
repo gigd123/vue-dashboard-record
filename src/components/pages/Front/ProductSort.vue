@@ -2,9 +2,10 @@
   <div class="row">
     <Sidebar />
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
-      <ProductList :products="filterProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
+      <ProductList v-if="filterProducts.length > 0" :products="filterProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
+      <NoResults v-else />
       <ProductModal :product="product" />
-      <Pagination :pagination="pagination" @switchPagination="getClientAllProducts"/>
+      <Pagination v-if="filterProducts.length > 0" :pagination="pagination" @switchPagination="getClientAllProducts"/>
     </main>
   </div>
 
@@ -15,6 +16,7 @@ import Sidebar from './Sidebar'
 import Pagination from '../../common/Pagination'
 import ProductModal from '../../common/ProductModal'
 import ProductList from '../../common/ProductList.vue'
+import NoResults from '../../common/NoResults.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -22,7 +24,8 @@ export default {
     Sidebar,
     Pagination,
     ProductModal,
-    ProductList
+    ProductList,
+    NoResults
   },
   data () {
     return {

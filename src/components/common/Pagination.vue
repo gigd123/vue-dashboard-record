@@ -7,9 +7,9 @@
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item" v-for="page in pagination.total_pages" :key="page"
+      <li class="page-item" v-for="index in pagination" :key="index"
         :class="{'active': pagination.current_page == page}">
-        <a class="page-link" href="#" @click.prevent="getAllProducts(page)">{{page}}</a>
+        <a class="page-link" href="#" @click.prevent="getAllProducts(pagination)">{{pagination}}</a>
       </li>
       <li class="page-item" :class="{'disabled': !pagination.has_next}">
         <a class="page-link" href="#" aria-label="Next"

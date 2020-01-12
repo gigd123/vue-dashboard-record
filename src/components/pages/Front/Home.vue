@@ -82,13 +82,16 @@ export default {
     getCart () {
       this.$store.dispatch('cartModule/getCart')
     },
-    getPages (page =1 ) {
-      let pages = Math.ceil(this.searchProducts.length / 9)
+    getPages (page = 1) {
+      // let pages = Math.ceil(this.searchProducts.length / 9)
+      let showProducts = this.searchProducts.splice(0, page)
+      console.log(showProducts)
     }
   },
   created () {
     this.getClientAllProducts()
     this.getCart()
+    this.getPages(2)
   }
 }
 </script>

@@ -84,9 +84,9 @@ export default {
     },
     getPages (page = 1) {
       // let pages = Math.ceil(this.searchProducts.length / 9)
-      console.log('this.searchProducts', this.searchProducts)
       let showProducts = this.searchProducts.splice(0, page)
-      console.log(showProducts)
+      console.log('this.searchProducts', this.searchProducts)
+      console.log('showProducts', showProducts)
     }
   },
   created () {

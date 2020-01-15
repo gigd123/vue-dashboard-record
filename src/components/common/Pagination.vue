@@ -8,12 +8,12 @@
         </a>
       </li>
       <li class="page-item" v-for="index in pagination" :key="index"
-        :class="{'active': pagination.current_page == page}">
+        :class="{'active': pagination.current_page == 1}">
         <a class="page-link" href="#" @click.prevent="getAllProducts(pagination)">{{pagination}}</a>
       </li>
       <li class="page-item" :class="{'disabled': !pagination.has_next}">
         <a class="page-link" href="#" aria-label="Next"
-        @click.prevent="getAllProducts(pagination.current_page + 1)">
+        @click.prevent="getAllProducts(1)">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>

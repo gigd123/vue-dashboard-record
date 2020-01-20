@@ -23,7 +23,7 @@
     </div> -->
     <ProductList v-if="searchProducts.length > 0" :products="searchProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
     <NoResults v-else />
-    <Pagination v-if="searchProducts.length > 0" :pagination="pages" @switchPagination="getClientAllProducts"/>
+    <Pagination v-if="searchProducts.length > 0" :pagination="pages" @switchPagination="searchProducts"/>
   </div>
 
 </template>
@@ -81,18 +81,11 @@ export default {
     },
     getCart () {
       this.$store.dispatch('cartModule/getCart')
-    },
-    getPages (page = 1) {
-      // let pages = Math.ceil(this.searchProducts.length / 9)
-      let showProducts = this.searchProducts.splice(0, page)
-      console.log('this.searchProducts', this.searchProducts)
-      console.log('showProducts', showProducts)
     }
   },
   created () {
     this.getClientAllProducts()
     this.getCart()
-    this.getPages(2)
   }
 }
 </script>

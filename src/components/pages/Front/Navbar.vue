@@ -128,7 +128,6 @@ export default {
 </script>
 
 <style>
-  /* @import url("@fortawesome/fontawesome-free/css/all.css"); */
   .cartMenu {
     left: unset;
     right: 0;

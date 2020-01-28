@@ -92,6 +92,7 @@ export default {
       this.$store.commit('productsModule/SEARCH_SUBCAT', '')
       this.$store.commit('productsModule/SEARCH_CAT', text)
       this.$store.dispatch('updateLoading', false)
+      this.$store.commit('paginationModule/GET_PAGE', {page: 1, products: this.filterProducts})
     },
     search (text) {
       const curUrl = window.location.href.split('/')
@@ -121,7 +122,8 @@ export default {
       categories: 'productsModule/categories',
       getCart: 'cartModule/getCart',
       cart: 'cartModule/cart',
-      cartsLen: 'cartModule/cartsLen'
+      cartsLen: 'cartModule/cartsLen',
+      filterProducts: 'productsModule/filterProducts'
     })
   }
 }

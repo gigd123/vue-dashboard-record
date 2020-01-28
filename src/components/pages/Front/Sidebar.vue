@@ -28,7 +28,8 @@ import {mapGetters} from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      isLoading: 'isLoading'
+      isLoading: 'isLoading',
+      filterProducts: 'productsModule/filterProducts'
     })
   },
   methods: {
@@ -40,6 +41,7 @@ export default {
       this.$store.dispatch('updateLoading', true)
       this.$store.commit('productsModule/SEARCH_SUBCAT', text)
       this.$store.dispatch('updateLoading', false)
+      this.$store.commit('paginationModule/GET_PAGE', {page: 1, products: this.filterProducts})
     }
   }
 }

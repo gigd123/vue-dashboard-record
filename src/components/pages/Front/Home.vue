@@ -21,9 +21,18 @@
         <span class="sr-only">Next</span>
       </a>
     </div> -->
-    <ProductList v-if="searchProducts.length > 0" :products="searchProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
+    <ProductList v-if="!!curProductPage && curProductPage.length > 0"
+      :products="curProductPage"
+      :loadingItem="loadingItem"
+      @getProductDetail="getProductDetail"
+      @addToCart="addToCart" />
     <NoResults v-else />
-    <Pagination v-if="searchProducts.length > 0" :pagination="pages" @switchPagination="searchProducts"/>
+    <div class="col-12">
+      <Pagination v-if="searchProducts.length > 0"
+        :pagination="pages"
+        @switchPagination="searchProducts"
+        :products="searchProducts"/>
+    </div>
   </div>
 
 </template>
@@ -40,11 +49,6 @@ export default {
     ProductList,
     NoResults
   },
-  data () {
-    return {
-      pagination: {}
-    }
-  },
   computed: {
     cart () {
       return this.$store.state.cart
@@ -52,7 +56,8 @@ export default {
     ...mapGetters({
       loadingItem: 'loadingItem',
       searchProducts: 'productsModule/searchProducts',
-      product: 'productsModule/product'
+      product: 'productsModule/product',
+      curProductPage: 'paginationModule/getCurProductPage'
     }),
     pages () {
       let pages = Math.ceil(this.searchProducts.length / 9)

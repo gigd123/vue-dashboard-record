@@ -2,10 +2,19 @@
   <div class="row">
     <Sidebar />
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
-      <ProductList v-if="filterProducts.length > 0" :products="filterProducts" :loadingItem="loadingItem" @getProductDetail="getProductDetail" @addToCart="addToCart" />
+      <ProductList v-if="!!curProductPage && curProductPage.length > 0"
+        :products="curProductPage"
+        :loadingItem="loadingItem"
+        @getProductDetail="getProductDetail"
+        @addToCart="addToCart" />
       <NoResults v-else />
       <ProductModal :product="product" />
-      <Pagination v-if="filterProducts.length > 0" :pagination="pagination" @switchPagination="getClientAllProducts"/>
+      <div class="col-12">
+        <Pagination v-if="filterProducts.length > 0"
+          :pagination="pages"
+          @switchPagination="getClientAllProducts"
+          :products="filterProducts"/>
+      </div>
     </main>
   </div>
 
@@ -40,8 +49,14 @@ export default {
       loadingItem: 'loadingItem',
       products: 'productsModule/products',
       filterProducts: 'productsModule/filterProducts',
-      product: 'productsModule/product'
-    })
+      product: 'productsModule/product',
+      curProductPage: 'paginationModule/getCurProductPage'
+    }),
+    pages () {
+      console.log('page~~~')
+      let pages = Math.ceil(this.filterProducts.length / 9)
+      return pages
+    }
   },
   methods: {
     ...mapActions('productsModule', ['getClientAllProducts']),

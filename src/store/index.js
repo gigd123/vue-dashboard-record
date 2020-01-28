@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import productsModule from './product'
 import cartModule from './cart'
+import paginationModule from './pagination'
 
 Vue.use(Vuex)
 
@@ -37,6 +38,7 @@ export default new Vuex.Store({
   },
   modules: {
     productsModule,
-    cartModule
+    cartModule,
+    paginationModule
   }
 })

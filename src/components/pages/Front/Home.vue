@@ -24,8 +24,7 @@
     <ProductList v-if="!!curProductPage && curProductPage.length > 0"
       :products="curProductPage"
       :loadingItem="loadingItem"
-      @getProductDetail="getProductDetail"
-      @addToCart="addToCart" />
+      @getProductDetail="getProductDetail" />
     <NoResults v-else />
     <div class="col-12">
       <Pagination v-if="searchProducts.length > 0"
@@ -66,20 +65,10 @@ export default {
   },
   methods: {
     ...mapActions('productsModule', ['getClientAllProducts']),
-    getProduct (id) {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`
-      const vm = this
-      this.$store.commit('LOADINGITEM', id)
-      this.$http.get(api).then((response) => {
-        response.data.product.num = 1
-        vm.product = response.data.product
-        this.$store.commit('LOADINGITEM', '')
-      })
-    },
     getProductDetail (productId) {
       const vm = this
       vm.$store.dispatch('productsModule/getProduct', productId)
-      vm.$router.push({path: `/FrontDashboard/ProductDetail/${productId}`})
+      vm.$router.push(`/FrontDashboard/ProductDetail/${productId}`)
     },
     addToCart (id, qty = 1) {
       this.$store.dispatch('cartModule/addToCart', {id, qty})

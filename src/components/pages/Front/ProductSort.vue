@@ -5,8 +5,7 @@
       <ProductList v-if="!!curProductPage && curProductPage.length > 0"
         :products="curProductPage"
         :loadingItem="loadingItem"
-        @getProductDetail="getProductDetail"
-        @addToCart="addToCart" />
+        @getProductDetail="getProductDetail" />
       <NoResults v-else />
       <ProductModal :product="product" />
       <div class="col-12">

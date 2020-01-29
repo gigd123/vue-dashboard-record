@@ -74,11 +74,13 @@ export default new VueRouter({
         {
           path: 'orders',
           name: 'Orders',
+          meta: { requiresAuth: true },
           component: Orders
         },
         {
           path: 'coupon',
           name: 'Coupon',
+          meta: { requiresAuth: true },
           component: Coupon
         }
       ]
@@ -87,6 +89,7 @@ export default new VueRouter({
       name: 'Dashboard',
       path: '/Dashboard',
       component: Dashboard,
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'customer_orders',

@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top bg-dark flex-md-nowrap shadow">
-    <a class="navbar-brand bg-dark" href="#">Decathlon 迪卡儂</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top flex-md-nowrap">
+    <a class="navbar-brand bg-primary" href="#" @click.prevent="goToHome">Decathlon</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,9 +9,6 @@
         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="goToHome">首頁</a>
         </li>
-        <!-- <router-link class="nav-link" to="/FrontDashboard/Home">
-            首頁
-        </router-link> -->
         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchCat('m')">男士</a>
         </li>
@@ -30,7 +27,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search(searchText)">搜尋</button>
       </form>
       <div class="cart dropdown ml-2">
-        <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-shopping-cart text-white"></i>
         </a>
         <div class="cartNumber bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
@@ -57,10 +54,6 @@
               </tr>
             </tbody>
             </table>
-            <!-- <div class="dropdown-item border-bottom d-flex">
-              <div class="mr-2"></div>
-              <div></div>
-            </div> -->
             <a class="dropdown-item text-center text-danger" href="#" @click.prevent="goToCheckOut">直接去結帳</a>
           </div>
           <div class="cartMenu" aria-labelledby="dropdownMenuLink"
@@ -136,7 +129,8 @@ export default {
   .cartMenu {
     left: unset;
     right: 0;
-    min-width: 350px;
+    min-width: 450px;
+    font-size: 14px;
   }
   .cartNumber {
     top: -5px;

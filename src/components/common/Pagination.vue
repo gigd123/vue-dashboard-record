@@ -8,7 +8,7 @@
         </a>
       </li>
       <li class="page-item" v-for="index in pagination" :key="index"
-        :class="{'active': pagination.current_page == 1}">
+        :class="{'active': index === curPage}">
         <a class="page-link" href="#" @click.prevent="getPage(index)">{{index}}</a>
       </li>
       <li class="page-item" :class="{'disabled': curPage >= pagination}">

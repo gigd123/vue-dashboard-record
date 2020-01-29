@@ -100,6 +100,7 @@ export default {
         this.$router.push('/FrontDashboard/Home')
       }
       this.$store.commit('productsModule/SEARCH_TEXT', text)
+      this.$store.commit('paginationModule/GET_PAGE', {page: 1, products: this.searchProducts})
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModule/removeCartItem', id)
@@ -114,6 +115,7 @@ export default {
       }
       this.searchText = ''
       this.$store.commit('productsModule/SEARCH_TEXT', '')
+      this.$store.commit('paginationModule/GET_PAGE', {page: 1, products: this.searchProducts})
     }
   },
   computed: {
@@ -123,7 +125,8 @@ export default {
       getCart: 'cartModule/getCart',
       cart: 'cartModule/cart',
       cartsLen: 'cartModule/cartsLen',
-      filterProducts: 'productsModule/filterProducts'
+      filterProducts: 'productsModule/filterProducts',
+      searchProducts: 'productsModule/searchProducts'
     })
   }
 }

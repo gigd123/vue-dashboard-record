@@ -210,7 +210,6 @@ export default {
       const order = vm.form
       // vm.isLoading = true
       this.$validator.validate().then((result) => {
-        console.log('result====', result)
         if (result) {
           // do stuff if not valid
           this.$http.post(api, {data: order}).then((response) => {
@@ -227,13 +226,11 @@ export default {
       })
     },
     getOrder () {
-      console.log('getOrder')
       const vm = this
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order/${vm.orderId}`
       vm.isLoading = true
       this.$http.get(api).then((response) => {
         vm.order = response.data.order
-        console.log('get order response====', response)
         vm.isLoading = false
       })
     },
@@ -242,7 +239,6 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/pay/${vm.orderId}`
       vm.isLoading = true
       this.$http.post(api).then((response) => {
-        console.log('pay order response====', response)
         if (response.data.success) {
           vm.getOrder()
         }
@@ -256,7 +252,6 @@ export default {
         code: vm.coupon_code
       }
       this.$http.post(api, {data: coupon}).then((response) => {
-        console.log('response====', response)
         this.$store.dispatch('cartModule/getCart')
       })
     }

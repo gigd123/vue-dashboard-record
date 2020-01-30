@@ -127,10 +127,10 @@ export default {
 
 <style>
   .cartMenu {
-    left: unset;
-    right: 0;
-    min-width: 450px;
-    font-size: 14px;
+    left: unset !important;
+    right: 0 !important;
+    min-width: 450px !important;
+    font-size: 14px !important;
   }
   .cartNumber {
     top: -5px;

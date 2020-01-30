@@ -18,7 +18,8 @@
           </div>
           <div class="p-2">
             <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary"
-            v-if="product.category.indexOf(('tops' || 'pants' || 'jackets' || 'swimwear')) !== -1">
+            v-if="!!product.category &&
+                  product.category.indexOf('tops' || 'pants' || 'jackets' || 'swimwear') !== -1">
               <li class="border border-secondary"
               @click.prevent="productSize = 'S'"
               :class="{'border-primary bg-primary': productSize === 'S'}">
@@ -46,7 +47,7 @@
               </li>
             </ul>
             <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary"
-            v-if="product.category.indexOf('shoes') !== -1">
+            v-if="!!product.category && product.category.indexOf('shoes') !== -1">
               <li class="border border-secondary"
               @click.prevent="productSize = '36-37'"
               :class="{'border-primary bg-primary': productSize === '36-37'}">
@@ -137,12 +138,10 @@ export default {
     }
   },
   created () {
-    console.log('1')
     const strUrl = window.location.href
     const urlArr = strUrl.split('/')
     this.$store.dispatch('productsModule/getProduct', urlArr[urlArr.length - 1])
     this.getCart()
-    console.log('2')
   }
 }
 </script>

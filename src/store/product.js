@@ -58,6 +58,7 @@ export default {
         context.commit('PRODUCT', response.data.product)
         context.commit('LOADING', false, {root: true})
       })
+      console.log('get product')
     }
   },
   // 操作資料狀態，非同步行為不要在這邊執行，會導致 state 和 mutation 資料狀態不同步，除錯可能會有困難

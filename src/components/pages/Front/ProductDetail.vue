@@ -1,7 +1,6 @@
 <template>
   <div class="row">
-    <Sidebar />
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
+    <main role="main" class="col-md-9 col-lg-10 px-4">
       <div class="card mb-3 p-3">
     <div class="row no-gutters">
       <div class="col-md-4">
@@ -107,12 +106,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Sidebar from './Sidebar'
 
 export default {
-  components: {
-    Sidebar
-  },
   data () {
     return {
       productSize: 'S',
@@ -147,6 +142,9 @@ export default {
 </script>
 
 <style lang="scss">
+  main {
+    margin: 1.5rem auto 0 auto;
+  }
   .productNum {
     width: 30px;
     height: 30px;

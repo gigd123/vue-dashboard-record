@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top flex-md-nowrap">
-    <a class="navbar-brand bg-primary" href="#" @click.prevent="goToHome">Decathlon</a>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top flex-md-nowrap bg-primary">
+    <a class="navbar-brand bg-primary shadow-none" href="#" @click.prevent="goToHome">Decathlon</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

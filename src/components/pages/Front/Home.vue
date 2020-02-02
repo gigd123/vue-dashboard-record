@@ -1,16 +1,11 @@
 <template>
-  <div class="row pt-5 pl-3 pr-3">
-    <!-- <div id="carouselExampleControls" class="carousel slide pt-3 h-75" data-ride="carousel">
-      <div class="carousel-inner h-75">
-        <div class="carousel-item active">
-          <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
-        </div>
-        <div class="carousel-item">
-          <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
-        </div>
-        <div class="carousel-item">
-          <img src="../../../assets/images/climbing1.jpg" class="d-block w-100" alt="">
-        </div>
+  <div class="row row--small">
+    <div id="carouselExampleControls" class="carousel--size slide pt-3 w-100" data-ride="carousel">
+      <div class="carousel-inner carousel-inne--size h-100">
+        <div class="carousel-item active carousel--image slide1 h-100 "></div>
+        <div class="carousel-item carousel--image slide2 h-100 "></div>
+        <div class="carousel-item carousel--image slide3 h-100 "></div>
+        <div class="carousel-item carousel--image slide4 h-100 "></div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -20,7 +15,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div> -->
+    </div>
     <ProductList v-if="!!curProductPage && curProductPage.length > 0"
       :products="curProductPage"
       :loadingItem="loadingItem"
@@ -83,3 +78,34 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .row {
+    &--small {
+      padding: 3rem 5rem 0 5rem;
+    }
+    .carousel {
+      &--size {
+        height: 350px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      &--image {
+        background-size: cover;
+        background-position: center;
+      }
+    }
+    .slide1 {
+      background-image: url(../../../assets/images/carousel1.jpg);
+    }
+    .slide2 {
+      background-image: url(../../../assets/images/carousel2.jpg);
+    }
+    .slide3 {
+      background-image: url(../../../assets/images/carousel3.jpg);
+    }
+    .slide4 {
+      background-image: url(../../../assets/images/carousel4.jpg);
+    }
+  }
+</style>

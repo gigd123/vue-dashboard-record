@@ -33,7 +33,7 @@
         <div class="cartNumber bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
         <div class="dropdown-menu cartMenu" aria-labelledby="dropdownMenuLink">
           <div v-if="cartsLen !== 0">
-            <table class="table">
+            <table class="table table--height d-block overflow-auto">
               <thead>
                 <th>品名</th>
                 <th width="80">尺寸</th>
@@ -125,7 +125,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .cartMenu {
     left: unset !important;
     right: 0 !important;
@@ -138,5 +138,10 @@ export default {
     border: 1px solid;
     width: 18px;
     height: 18px;
+  }
+  .table {
+    &--height {
+        max-height: 75vh;
+    }
   }
 </style>

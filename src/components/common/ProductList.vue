@@ -3,7 +3,8 @@
       <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
         <div class="product w-75 card border-4 m-auto shadow-sm">
           <div class="d-flex justify-content-center">
-            <img class="productImage" :src="item.imageUrl" alt="">
+            <div class="productCard" style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+            <!-- <img class="productImage" :src="item.imageUrl" alt=""> -->
           </div>
           <div class="card-body">
             <h6 class="card-title text-truncate">
@@ -50,6 +51,10 @@ export default {
     box-shadow: 0px 0px 20px 1px rgb(40, 119, 238) !important;
   }
   .productImage {
+    width: 160px;
+    height: 160px;
+  }
+  .productCard {
     width: 160px;
     height: 160px;
   }

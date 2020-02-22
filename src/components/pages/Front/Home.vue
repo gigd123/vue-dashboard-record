@@ -7,14 +7,14 @@
         <div class="carousel-item carousel--image slide3 h-100 "></div>
         <div class="carousel-item carousel--image slide4 h-100 "></div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
       <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-      </a>
+      </a> -->
     </div>
     <ProductList v-if="!!curProductPage && curProductPage.length > 0"
       :products="curProductPage"
@@ -86,8 +86,8 @@ export default {
     }
     .carousel {
       &--size {
-        height: 350px;
-        max-width: 960px;
+        height: 450px;
+        max-width: 1200px;
         margin: 0 auto;
       }
       &--image {

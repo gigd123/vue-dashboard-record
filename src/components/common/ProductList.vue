@@ -1,26 +1,28 @@
 <template>
+  <div class="container-fluid">
     <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
-        <div class="product w-75 card border-4 m-auto shadow-sm">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" v-for="item in products" :key="item.id">
+        <div class="product col-12 col-lg-10 card border-4 m-auto shadow-sm">
           <div class="d-flex justify-content-center">
-            <div class="productCard" style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+            <div class="productCard" :style="{backgroundImage: `url(${item.imageUrl})`, backgroundSize: 'cover'}"></div>
             <!-- <img class="productImage" :src="item.imageUrl" alt=""> -->
           </div>
           <div class="card-body">
-            <h6 class="card-title text-truncate">
+            <div class="card-title card-title--size mb-4">
               <a class="text-dark stretched-link" href="#" @click.prevent="getProductDetail(item.id)">
                 {{item.title}}
               </a>
-            </h6>
-            <div class="d-flex justify-content-between align-items-baseline">
+            </div>
+            <div class="card__price--size">
               <!-- <del class="h6" v-if="!item.origin_price">原價{{item.origin_price}}元</del> -->
-              <del class="h6" v-if="item.origin_price && item.origin_price !== item.price">原價{{item.origin_price}}元</del>
-              <div class="h5 float-right" v-if="item.price">{{item.price}}元</div>
+              <del v-if="item.origin_price && item.origin_price !== item.price">原價{{item.origin_price}}元</del>
+              <div v-if="item.price">現價{{item.price}}元</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -55,7 +57,13 @@ export default {
     height: 160px;
   }
   .productCard {
-    width: 160px;
-    height: 160px;
+    width: 230px;
+    height: 230px;
+  }
+  .card-title--size {
+    height: 60px;
+  }
+  .card__price--size {
+    height: 40px;
   }
 </style>

@@ -54,7 +54,7 @@ export default {
       curProductPage: 'paginationModule/getCurProductPage'
     }),
     pages () {
-      let pages = Math.ceil(this.searchProducts.length / 9)
+      let pages = Math.ceil(this.searchProducts.length / 12)
       return pages
     }
   },

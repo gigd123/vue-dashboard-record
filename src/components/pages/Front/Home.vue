@@ -1,20 +1,20 @@
 <template>
   <div class="row row--small">
-    <div id="carouselExampleControls" class="carousel--size slide pt-3 w-100" data-ride="carousel">
-      <div class="carousel-inner carousel-inne--size h-100">
+    <div id="carouselExampleControls" class="carousel slide carousel--size pt-3 w-100" data-ride="carousel">
+      <div class="carousel-inner carousel--size h-100">
         <div class="carousel-item active carousel--image slide1 h-100 "></div>
         <div class="carousel-item carousel--image slide2 h-100 "></div>
         <div class="carousel-item carousel--image slide3 h-100 "></div>
         <div class="carousel-item carousel--image slide4 h-100 "></div>
       </div>
-      <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
       <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-      </a> -->
+      </a>
     </div>
     <ProductList v-if="!!curProductPage && curProductPage.length > 0"
       :products="curProductPage"

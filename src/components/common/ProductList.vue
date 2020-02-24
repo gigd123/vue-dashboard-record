@@ -5,18 +5,16 @@
         <div class="product col-12 col-lg-10 card border-4 m-auto shadow-sm">
           <div class="d-flex justify-content-center">
             <div class="productCard" :style="{backgroundImage: `url(${item.imageUrl})`, backgroundSize: 'cover'}"></div>
-            <!-- <img class="productImage" :src="item.imageUrl" alt=""> -->
           </div>
           <div class="card-body">
-            <div class="card-title card-title--size mb-4">
+            <div class="card-title card-title--size">
               <a class="text-dark stretched-link" href="#" @click.prevent="getProductDetail(item.id)">
-                {{item.title}}
+                {{item.title | titleFilter}}
               </a>
             </div>
             <div class="card__price--size">
-              <!-- <del class="h6" v-if="!item.origin_price">原價{{item.origin_price}}元</del> -->
-              <del v-if="item.origin_price && item.origin_price !== item.price">原價{{item.origin_price}}元</del>
-              <div v-if="item.price">現價{{item.price}}元</div>
+              <del class="text-secondary" v-if="item.origin_price && item.origin_price !== item.price">NT${{item.origin_price}}</del>
+              <div class="text-danger" v-if="item.price">NT${{item.price}}</div>
             </div>
           </div>
         </div>

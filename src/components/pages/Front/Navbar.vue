@@ -22,10 +22,10 @@
           <a class="nav-link" href="#" @click.prevent="searchCat('acc')">運動配件</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchText">
+      <div class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchText" @keyup.enter="search(searchText)">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search(searchText)">搜尋</button>
-      </form>
+      </div>
       <div class="cart dropdown ml-2">
         <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-shopping-cart text-white"></i>

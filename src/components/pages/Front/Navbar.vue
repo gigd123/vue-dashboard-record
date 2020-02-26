@@ -5,7 +5,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <!-- <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="goToHome">首頁</a>
         </li>
@@ -21,16 +21,36 @@
         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchCat('acc')">運動配件</a>
         </li>
+      </ul> -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click.prevent="goToHome">首頁</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click.prevent="searchCat('m')" data-toggle="collapse" data-target="#maleSubNavbar" aria-controls="maleSubNavbar" aria-expanded="false">男士</a>
+          <SubNavbar :itemId="'maleSubNavbar'" />
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click.prevent="searchCat('f')" data-toggle="collapse" data-target="#femaleSubNavbar" aria-controls="femaleSubNavbar" aria-expanded="false">女士</a>
+          <SubNavbar :itemId="'femaleSubNavbar'" />
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click.prevent="searchCat('kid')" data-toggle="collapse" data-target="#childSubNavbar" aria-controls="childSubNavbar" aria-expanded="false">兒童</a>
+          <SubNavbar :itemId="'childSubNavbar'" />
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" @click.prevent="searchCat('acc')">運動配件</a>
+        </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchText" @keyup.enter="search(searchText)">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search(searchText)">搜尋</button>
       </div>
       <div class="cart dropdown ml-2">
-        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary dropdown-toggle position-relative" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-shopping-cart text-white"></i>
+          <div class="cartNumber bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
         </a>
-        <div class="cartNumber bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
         <div class="dropdown-menu cartMenu" aria-labelledby="dropdownMenuLink">
           <div v-if="cartsLen !== 0">
             <table class="table table--height d-block overflow-auto">
@@ -68,8 +88,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import SubNavbar from './SubNavbar'
 
 export default {
+  components: {
+    SubNavbar
+  },
   data () {
     return {
       searchText: ''

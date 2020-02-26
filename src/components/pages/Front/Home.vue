@@ -1,5 +1,5 @@
 <template>
-  <div class="row row--small">
+  <div class="row mx-auto">
     <div id="carouselExampleControls" class="carousel slide carousel--size pt-3 w-100" data-ride="carousel">
       <div class="carousel-inner carousel--size h-100">
         <div class="carousel-item active carousel--image slide1 h-100 "></div>
@@ -81,9 +81,6 @@ export default {
 
 <style lang="scss">
   .row {
-    &--small {
-      padding: 3rem 5rem 0 5rem;
-    }
     .carousel {
       &--size {
         height: 450px;

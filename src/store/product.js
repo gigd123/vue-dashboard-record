@@ -21,12 +21,10 @@ export default {
     getAllProducts (context, page) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`
       // 由於 LOADING 是屬於 global，必須加上 {root: true} 判斷為 global
-      console.log('get products~~~!')
       context.commit('LOADING', true, {root: true})
       // 由於這邊的 this 不是指向原本 vue 的元件，無法使用 this 直接去使用 $http中的 方法，必須另行導入 axios
       // this.$http.get(api).then((response) => {
       axios.get(api).then((response) => {
-        console.log('response=====', response)
         context.commit('PRODUCTS', response.data.products)
         context.commit('CATEGORIES', response.data.products)
         // vm.pagination = response.data.pagination
@@ -58,7 +56,6 @@ export default {
         context.commit('PRODUCT', response.data.product)
         context.commit('LOADING', false, {root: true})
       })
-      console.log('get product')
     }
   },
   // 操作資料狀態，非同步行為不要在這邊執行，會導致 state 和 mutation 資料狀態不同步，除錯可能會有困難
@@ -78,7 +75,6 @@ export default {
       })
     },
     SEARCH_TEXT (state, payload) {
-      console.log('payload', payload)
       state.searchText = payload
     },
     SEARCH_CAT (state, payload) {

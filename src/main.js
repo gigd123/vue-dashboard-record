@@ -14,8 +14,9 @@ import router from './router'
 import store from './store'
 import App from './App'
 import './bus'
-import currencyFilter from './filters/currency'
+import currencyFilter from '@/filters/currency'
 import dateFilter from '@/filters/date'
+import titleFilter from '@/filters/productTitle'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
@@ -29,6 +30,7 @@ Vue.component('Loading', Loading)
 // 全域啟用
 Vue.filter('currency', currencyFilter)
 Vue.filter('date', dateFilter)
+Vue.filter('titleFilter', titleFilter)
 
 Vue.use(VueI18n)
 const i18n = new VueI18n({

@@ -11,8 +11,8 @@
           <div class="d-block">
             <h5 class="card-title col-8">{{product.title}}</h5>
             <div class="col">
-              <h5 class="col">原價：<span>{{ product.origin_price }}</span></h5>
-              <h5 class="col">現價：<span>{{ product.price }}</span></h5>
+              <h5 class="col text-secondary">NT$<span>{{ product.origin_price }}</span></h5>
+              <h5 class="col text-danger">NT$<span>{{ product.price }}</span></h5>
             </div>
           </div>
           <div class="p-2">

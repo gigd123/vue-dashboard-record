@@ -52,8 +52,7 @@ export default {
       curProductPage: 'paginationModule/getCurProductPage'
     }),
     pages () {
-      console.log('page~~~')
-      let pages = Math.ceil(this.filterProducts.length / 9)
+      let pages = Math.ceil(this.filterProducts.length / 12)
       return pages
     }
   },

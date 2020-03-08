@@ -1,28 +1,89 @@
 <template>
   <div>
     <Navbar />
+      <div class="cart dropdown cart__mobile ml-2 .d-none .d-sm-block .d-md-none">
+        <a class="btn btn-primary dropdown-toggle position-relative" href="#" role="button" id="cartMenuLink__mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-shopping-cart text-white"></i>
+          <div class="cartNumber__mobile bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
+        </a>
+        <div class="dropdown-menu cartMenu__mobile" aria-labelledby="cartMenuLink__mobile">
+          <div v-if="cartsLen !== 0">
+            <table class="table table--height d-block overflow-auto">
+              <thead>
+                <th>品名</th>
+                <th width="80">尺寸</th>
+                <th width="60">數量</th>
+                <th width="50"></th>
+              </thead>
+              <tbody>
+              <tr v-for="cart in cart.carts" :key="cart.id">
+                <td>{{cart.product.title}}</td>
+                <td>{{cart.size}}</td>
+                <td>{{cart.qty}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-danger btn-sm"
+                  @click="removeCartItem(cart.id)">
+                  <i class="far fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+            <a class="dropdown-item text-center text-danger" href="#" @click.prevent="goToCheckOut">直接去結帳</a>
+          </div>
+          <div class="cartMenu" aria-labelledby="dropdownMenuLink"
+          v-else>
+          <div class="dropdown-item">0 個商品</div>
+        </div>
+        </div>
+      </div>
     <div class="container-fluid">
       <router-view></router-view>
-      <!-- <div class="row">
-        <Sidebar />
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-4">
-          <router-view></router-view>
-        </main>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-// import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import Home from './Home'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    // Sidebar,
     Navbar,
     Home
+  },
+  methods: {
+    removeCartItem (id) {
+      this.$store.dispatch('cartModule/removeCartItem', id)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      isLoading: 'isLoading',
+      getCart: 'cartModule/getCart',
+      cart: 'cartModule/cart',
+      cartsLen: 'cartModule/cartsLen'
+    })
   }
 }
 </script>
+
+<style lang="scss">
+  .cart__mobile {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 20;
+  }
+  .cartNumber__mobile {
+    top: -5px;
+    right: 5px;
+    border: 1px solid;
+    width: 18px;
+    height: 18px;
+  }
+  .cartMenu__mobile {
+
+  }
+</style>

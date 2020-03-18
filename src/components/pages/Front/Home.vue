@@ -2,8 +2,7 @@
   <div class="row mx-auto">
     <div id="carouselExampleControls" class="carousel slide carousel--size pt-3 w-100" data-ride="carousel">
       <div class="carousel-inner carousel--size h-100">
-        <div class="carousel-item active carousel--image slide1 h-100 "></div>
-        <div class="carousel-item carousel--image slide2 h-100 "></div>
+        <div class="carousel-item active carousel--image slide2 h-100 "></div>
         <div class="carousel-item carousel--image slide3 h-100 "></div>
         <div class="carousel-item carousel--image slide4 h-100 "></div>
       </div>

@@ -6,7 +6,7 @@
           <i class="fas fa-shopping-cart text-white"></i>
           <div class="cartNumber__mobile bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
         </a>
-        <div class="dropdown-menu cartMenu__mobile" aria-labelledby="cartMenuLink__mobile">
+        <!-- <div class="dropdown-menu cartMenu__mobile" aria-labelledby="cartMenuLink__mobile">
           <div v-if="cartsLen !== 0">
             <table class="table table--height d-block overflow-auto">
               <thead>
@@ -33,9 +33,9 @@
           </div>
           <div class="cartMenu" aria-labelledby="dropdownMenuLink"
           v-else>
-          <div class="dropdown-item">0 個商品</div>
-        </div>
-        </div>
+            <div class="dropdown-item">0 個商品</div>
+          </div>
+        </div> -->
       </div>
     <div class="container-fluid">
       <router-view></router-view>

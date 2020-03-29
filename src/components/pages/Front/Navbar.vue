@@ -29,7 +29,7 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchText" @keyup.enter="search(searchText)">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search(searchText)">搜尋</button>
       </div>
-      <div class="cart dropdown ml-2 .d-none .d-sm-block">
+      <div class="cart dropdown ml-2 d-none d-sm-block">
         <a class="btn btn-primary dropdown-toggle position-relative" href="#" role="button" id="cartMenuLink__desktop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-shopping-cart text-white"></i>
           <div class="cartNumber__desktop bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>

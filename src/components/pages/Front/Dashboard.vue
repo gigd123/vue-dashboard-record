@@ -1,12 +1,12 @@
 <template>
   <div>
     <Navbar />
-      <div class="cart dropdown cart__mobile ml-2 .d-none .d-sm-block .d-md-none">
-        <a class="btn btn-primary dropdown-toggle position-relative" href="#" role="button" id="cartMenuLink__mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="cart dropdown cart__mobile ml-2 d-block d-sm-none">
+        <a class="btn btn-primary dropdown-toggle position-relative" href="#" @click.prevent="cartMenu = !cartMenu">
           <i class="fas fa-shopping-cart text-white"></i>
           <div class="cartNumber__mobile bg-dark d-flex justify-content-center align-items-center position-absolute rounded-circle">{{cartsLen}}</div>
         </a>
-        <!-- <div class="dropdown-menu cartMenu__mobile" aria-labelledby="cartMenuLink__mobile">
+        <div class="cartMenu__mobile" v-if="!!cartMenu">
           <div v-if="cartsLen !== 0">
             <table class="table table--height d-block overflow-auto">
               <thead>
@@ -35,7 +35,7 @@
           v-else>
             <div class="dropdown-item">0 個商品</div>
           </div>
-        </div> -->
+        </div>
       </div>
     <div class="container-fluid">
       <router-view></router-view>
@@ -52,6 +52,11 @@ export default {
   components: {
     Navbar,
     Home
+  },
+  data () {
+    return {
+      cartMenu: false
+    }
   },
   methods: {
     removeCartItem (id) {
@@ -70,6 +75,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./../../../assets/all.scss";
   .cart__mobile {
     position: fixed;
     bottom: 10px;
@@ -84,6 +90,11 @@ export default {
     height: 18px;
   }
   .cartMenu__mobile {
-
+    width: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 60px;
+    background: $white;
   }
 </style>

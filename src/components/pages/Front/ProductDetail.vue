@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <main role="main" class="col-md-9 col-lg-10 px-4">
+    <main role="main" class="col-md-9 col-lg-10 px-4 col-12">
       <div class="card mb-3 p-3">
     <div class="row no-gutters">
       <div class="col-md-4">
@@ -9,14 +9,15 @@
       <div class="col-md-8">
         <div class="card-body">
           <div class="d-block">
-            <h5 class="card-title col-8">{{product.title}}</h5>
+            <h5 class="card-title col-12 col-md-8">{{product.title}}</h5>
             <div class="col">
               <h5 class="col text-secondary">NT$<span>{{ product.origin_price }}</span></h5>
               <h5 class="col text-danger">NT$<span>{{ product.price }}</span></h5>
             </div>
           </div>
           <div class="p-2">
-            <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary"
+            <h6>尺寸</h6>
+            <ul class="productSize d-flex justify-content-between flex-wrap align-content-stretch text-center p-0 text-secondary"
             v-if="!!product.category &&
                   product.category.indexOf('tops' || 'pants' || 'jackets' || 'swimwear') !== -1">
               <li class="border border-secondary"
@@ -45,7 +46,7 @@
                 <a href="#" :class="{'text-white': productSize === 'XXL'}">XXL</a>
               </li>
             </ul>
-            <ul class="productSize d-flex justify-content-between text-center p-0 text-secondary"
+            <ul class="productSize d-flex justify-content-between flex-wrap align-content-stretch text-center p-0 text-secondary"
             v-if="!!product.category && product.category.indexOf('shoes') !== -1">
               <li class="border border-secondary"
               @click.prevent="productSize = '36-37'"
@@ -78,7 +79,7 @@
                 <a href="#" :class="{'text-white': productSize === '46-47'}">46-47</a>
               </li>
             </ul>
-            <h5>數量</h5>
+            <h6>數量</h6>
             <a class="changeNum text-center" href="#" @click.prevent="addProductNum(-1)">
               <i class="fas fa-minus"></i>
             </a>
@@ -156,7 +157,6 @@ export default {
     cursor: pointer;
   }
   .productSize {
-    width: 350px;
     list-style: none;
     li {
       cursor: pointer;
@@ -167,6 +167,11 @@ export default {
       a {
         text-decoration: none;
       }
+    }
+  }
+  @media (max-width:576px) {
+    .productSize {
+      height: 80px;
     }
   }
 </style>

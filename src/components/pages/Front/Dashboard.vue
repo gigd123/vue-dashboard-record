@@ -16,20 +16,20 @@
                 <th width="50"></th>
               </thead>
               <tbody>
-              <tr v-for="cart in cart.carts" :key="cart.id">
-                <td>{{cart.product.title}}</td>
-                <td>{{cart.size}}</td>
-                <td>{{cart.qty}}</td>
-                <td>
-                  <button type="button" class="btn btn-outline-danger btn-sm"
-                  @click="removeCartItem(cart.id)">
-                  <i class="far fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr>
+                <tr v-for="cart in cart.carts" :key="cart.id">
+                  <td>{{cart.product.title}}</td>
+                  <td>{{cart.size}}</td>
+                  <td>{{cart.qty}}</td>
+                  <td>
+                    <button type="button" class="btn btn-outline-danger btn-sm"
+                    @click="removeCartItem(cart.id)">
+                    <i class="far fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
             </tbody>
             </table>
-            <a class="dropdown-item text-center text-danger" href="#" @click.prevent="goToCheckOut">直接去結帳</a>
+            <a class="dropdown-item text-center text-white bg-danger" href="#" @click.prevent="goToCheckOut">直接去結帳</a>
           </div>
           <div class="cartMenu" aria-labelledby="dropdownMenuLink"
           v-else>

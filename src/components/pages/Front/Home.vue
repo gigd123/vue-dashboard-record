@@ -1,6 +1,6 @@
 <template>
   <div class="row mx-auto">
-    <!-- <div id="carouselExampleControls" class="carousel slide carousel--size pt-3 w-100" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide carousel--size pt-3 w-100" data-ride="carousel">
       <div class="carousel-inner carousel--size h-100">
         <div class="carousel-item active carousel--image slide2 h-100 "></div>
         <div class="carousel-item carousel--image slide3 h-100 "></div>
@@ -14,7 +14,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div> -->
+    </div>
     <ProductList v-if="!!curProductPage && curProductPage.length > 0"
       :products="curProductPage"
       :loadingItem="loadingItem"

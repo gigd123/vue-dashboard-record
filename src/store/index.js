@@ -11,7 +11,8 @@ export default new Vuex.Store({
   strict: true,
   state: {
     isLoading: false,
-    loadingItem: ''
+    loadingItem: '',
+    menuToggle: false
   },
   // 操作行為，如ajax，但是不用於操作資料狀態
   actions: {

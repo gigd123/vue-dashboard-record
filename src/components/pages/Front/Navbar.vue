@@ -1,10 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top flex-md-nowrap bg-primary">
     <a class="navbar-brand bg-primary shadow-none" href="#" @click.prevent="goToHome">Decathlon</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" @click="menuToggle = !menuToggle">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse text-white" id="navbarSupportedContent" :class="{'show': !!menuToggle}">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="goToHome">首頁</a>
@@ -79,7 +79,8 @@ export default {
   },
   data () {
     return {
-      searchText: ''
+      searchText: '',
+      menuToggle: false
     }
   },
   methods: {
@@ -95,6 +96,7 @@ export default {
       this.$store.commit('paginationModule/GET_PAGE', {page: 1, products: this.filterProducts})
     },
     search (text) {
+      this.menuToggle = !this.menuToggle
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('Home') === -1) {
         this.$router.push('/FrontDashboard/Home')
@@ -109,6 +111,7 @@ export default {
       this.$router.push({path: '/FrontDashboard/CheckOut'})
     },
     goToHome () {
+      this.menuToggle = !this.menuToggle
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('Home') === -1) {
         this.$router.push('/FrontDashboard/Home')
@@ -122,7 +125,6 @@ export default {
     ...mapGetters({
       isLoading: 'isLoading',
       categories: 'productsModule/categories',
-      getCart: 'cartModule/getCart',
       cart: 'cartModule/cart',
       cartsLen: 'cartModule/cartsLen',
       filterProducts: 'productsModule/filterProducts',

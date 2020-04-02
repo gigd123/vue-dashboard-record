@@ -61,12 +61,14 @@ export default {
   methods: {
     removeCartItem (id) {
       this.$store.dispatch('cartModule/removeCartItem', id)
+    },
+    goToCheckOut () {
+      this.$router.push({path: '/FrontDashboard/CheckOut'})
     }
   },
   computed: {
     ...mapGetters({
       isLoading: 'isLoading',
-      getCart: 'cartModule/getCart',
       cart: 'cartModule/cart',
       cartsLen: 'cartModule/cartsLen'
     })

@@ -11,69 +11,69 @@
           <div class="d-block">
             <h5 class="card-title col-12 col-md-8">{{product.title}}</h5>
             <div class="col">
-              <h5 class="col text-secondary">NT$<span>{{ product.origin_price }}</span></h5>
+              <h5 class="col text-secondary"><del>NT$<span>{{ product.origin_price }}</span></del></h5>
               <h5 class="col text-danger">NT$<span>{{ product.price }}</span></h5>
             </div>
           </div>
           <div class="p-2">
             <h6>尺寸</h6>
-            <ul class="productSize d-flex justify-content-between flex-wrap align-content-stretch text-center p-0 text-secondary"
+            <ul class="productSize d-flex flex-wrap align-content-stretch text-center p-0 text-secondary"
             v-if="!!product.category &&
                   product.category.indexOf('tops' || 'pants' || 'jackets' || 'swimwear') !== -1">
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = 'S'"
               :class="{'border-primary bg-primary': productSize === 'S'}">
                 <a href="#" :class="{'text-white': productSize === 'S'}">S</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = 'M'"
               :class="{'border-primary bg-primary': productSize === 'M'}">
                 <a href="#" :class="{'text-white': productSize === 'M'}">M</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = 'L'"
               :class="{'border-primary bg-primary': productSize === 'L'}">
                 <a href="#" :class="{'text-white': productSize === 'L'}">L</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = 'XL'"
               :class="{'border-primary bg-primary': productSize === 'XL'}">
                 <a href="#" :class="{'text-white': productSize === 'XL'}">XL</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = 'XXL'"
               :class="{'border-primary bg-primary': productSize === 'XXL'}">
                 <a href="#" :class="{'text-white': productSize === 'XXL'}">XXL</a>
               </li>
             </ul>
-            <ul class="productSize d-flex justify-content-between flex-wrap align-content-stretch text-center p-0 text-secondary"
+            <ul class="productSize d-flex flex-wrap align-content-stretch text-center p-0 text-secondary"
             v-if="!!product.category && product.category.indexOf('shoes') !== -1">
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = '36-37'"
               :class="{'border-primary bg-primary': productSize === '36-37'}">
                 <a href="#" :class="{'text-white': productSize === '36-37'}">36-37</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = '38-39'"
               :class="{'border-primary bg-primary': productSize === '38-39'}">
                 <a href="#" :class="{'text-white': productSize === '38-39'}">38-39</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = '40-41'"
               :class="{'border-primary bg-primary': productSize === '40-41'}">
                 <a href="#" :class="{'text-white': productSize === '40-41'}">40-41</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = '42-43'"
               :class="{'border-primary bg-primary': productSize === '42-43'}">
                 <a href="#" :class="{'text-white': productSize === '42-43'}">42-43</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = '44-45'"
               :class="{'border-primary bg-primary': productSize === '44-45'}">
                 <a href="#" :class="{'text-white': productSize === '44-45'}">44-45</a>
               </li>
-              <li class="border border-secondary"
+              <li class="border border-secondary m-1"
               @click.prevent="productSize = '46-47'"
               :class="{'border-primary bg-primary': productSize === '46-47'}">
                 <a href="#" :class="{'text-white': productSize === '46-47'}">46-47</a>

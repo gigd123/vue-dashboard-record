@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top flex-md-nowrap bg-primary">
     <a class="navbar-brand bg-primary shadow-none" href="#" @click.prevent="goToHome">Decathlon</a>
-    <button class="navbar-toggler" @click="menuToggle = !menuToggle">
+    <button class="navbar-toggler" @click="toggleMenu()">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse text-white" id="navbarSupportedContent" :class="{'show': !!menuToggle}">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#" @click.prevent="goToHome">首頁</a>
+          <a class="nav-link" href="#" @click.prevent="goToHome()">首頁</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" @click.prevent="searchCat('m')" data-toggle="collapse" data-target="#maleSubNavbar" aria-controls="maleSubNavbar" aria-expanded="false">男士</a>
@@ -79,12 +79,14 @@ export default {
   },
   data () {
     return {
-      searchText: '',
-      menuToggle: false
+      searchText: ''
     }
   },
   methods: {
     searchCat (text) {
+      if (text === 'acc') {
+        this.$store.commit('MENU_TOGGLE', !this.menuToggle)
+      }
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')
@@ -96,7 +98,7 @@ export default {
       this.$store.commit('paginationModule/GET_PAGE', {page: 1, products: this.filterProducts})
     },
     search (text) {
-      this.menuToggle = !this.menuToggle
+      this.$store.commit('MENU_TOGGLE', !this.menuToggle)
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('Home') === -1) {
         this.$router.push('/FrontDashboard/Home')
@@ -111,7 +113,7 @@ export default {
       this.$router.push({path: '/FrontDashboard/CheckOut'})
     },
     goToHome () {
-      this.menuToggle = !this.menuToggle
+      this.$store.commit('MENU_TOGGLE', !this.menuToggle)
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('Home') === -1) {
         this.$router.push('/FrontDashboard/Home')
@@ -119,11 +121,15 @@ export default {
       this.searchText = ''
       this.$store.commit('productsModule/SEARCH_TEXT', '')
       this.$store.commit('paginationModule/GET_PAGE', {page: 1, products: this.searchProducts})
+    },
+    toggleMenu () {
+      this.$store.commit('MENU_TOGGLE', !this.menuToggle)
     }
   },
   computed: {
     ...mapGetters({
       isLoading: 'isLoading',
+      menuToggle: 'menuToggle',
       categories: 'productsModule/categories',
       cart: 'cartModule/cart',
       cartsLen: 'cartModule/cartsLen',

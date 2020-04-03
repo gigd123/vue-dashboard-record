@@ -1,17 +1,17 @@
 <template>
   <div class="pt-5">
     <ul class="checkStep row pt-5 m-auto justify-content-center">
-      <li class="step">
+      <li class="step" :class="{'d-none d-lg-block': step !== 1}">
         <div class="step_circle m-auto border border-primary rounded-circle"
         :class="{'bg-primary': step === 1, 'text-white':  step === 1}">1</div>
         <p>確認購物清單</p>
       </li>
-      <li class="step">
+      <li class="step" :class="{'d-none d-lg-block': step !== 2}">
         <div class="step_circle m-auto border border-primary rounded-circle"
         :class="{'bg-primary': step === 2, 'text-white':  step === 2}">2</div>
         <p>填寫資料</p>
       </li>
-      <li class="step">
+      <li class="step" :class="{'d-none d-lg-block': step !== 3}">
         <div class="step_circle m-auto border border-primary rounded-circle"
         :class="{'bg-primary': step === 3, 'text-white':  step === 3}">3</div>
         <p>金流付款</p>

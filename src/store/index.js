@@ -30,12 +30,16 @@ export default new Vuex.Store({
     },
     LOADINGITEM (state, payload) {
       state.loadingItem = payload
+    },
+    MENU_TOGGLE (state, payload) {
+      state.menuToggle = payload
     }
   },
   // 取代 computed
   getters: {
     isLoading: state => state.isLoading,
-    loadingItem: state => state.loadingItem
+    loadingItem: state => state.loadingItem,
+    menuToggle: state => state.menuToggle
   },
   modules: {
     productsModule,

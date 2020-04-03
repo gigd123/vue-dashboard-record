@@ -28,11 +28,13 @@ export default {
   props: ['itemId'],
   computed: {
     ...mapGetters({
-      filterProducts: 'productsModule/filterProducts'
+      filterProducts: 'productsModule/filterProducts',
+      menuToggle: 'menuToggle'
     })
   },
   methods: {
     searchSubCat (text) {
+      this.$store.commit('MENU_TOGGLE', !this.menuToggle)
       const curUrl = window.location.href.split('/')
       if (curUrl.indexOf('ProductSort') === -1) {
         this.$router.push('/FrontDashboard/ProductSort')

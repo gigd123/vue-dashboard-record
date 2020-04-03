@@ -176,7 +176,6 @@ export default {
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/coupon/${this.temCoupon.id}`
       const vm = this
       this.$http.delete(api).then((response) => {
-        console.log('response===', response)
         if (response.data.success) {
           $('#delCouponModal').modal('hide')
           vm.getCoupons()

@@ -235,7 +235,6 @@ export default {
       }
       vm.isLoading = true
       this.$http.post(api, {data: coupon}).then((response) => {
-        console.log('response====', response)
         vm.getCart()
         vm.isLoading = false
       })
@@ -246,18 +245,15 @@ export default {
       const order = vm.form
       // vm.isLoading = true
       this.$validator.validate().then((result) => {
-        console.log('result====', result)
         if (result) {
           // do stuff if not valid
           this.$http.post(api, {data: order}).then((response) => {
-            console.log('訂單已建立====', response)
             if (response.data.success) {
               vm.$router.push(`/customer_checkout/${response.data.orderId}`)
             }
             vm.isLoading = false
           })
         } else {
-          console.log('欄位不完整')
         }
       })
     }

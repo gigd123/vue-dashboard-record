@@ -73,7 +73,6 @@ export default {
       vm.isLoading = true
       this.$http.get(api).then((response) => {
         vm.order = response.data.order
-        console.log('response====', response)
         vm.isLoading = false
       })
     },
@@ -82,7 +81,6 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/pay/${vm.orderId}`
       vm.isLoading = true
       this.$http.post(api).then((response) => {
-        console.log('response====', response)
         if (response.data.success) {
           vm.getOrder()
         }
@@ -91,7 +89,6 @@ export default {
     }
   },
   created () {
-    console.log('this.$route.params====', this.$route.params)
     this.orderId = this.$route.params.orderId
     this.getOrder()
   }

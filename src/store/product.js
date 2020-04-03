@@ -96,7 +96,6 @@ export default {
     searchProducts: (state) => {
       return state.products.filter(item => {
         if (item.title.indexOf(state.searchText) !== -1) {
-          console.log('searchText===', state.searchText)
           const data = item
           return data
         }
@@ -106,7 +105,6 @@ export default {
       if (state.products) {
         return state.products.filter((item) => {
           if (item.category.indexOf(state.searchCat) !== -1) {
-            console.log('state.searchCat===', state.searchCat)
             if (state.searchSubCat !== '') {
               if (item.category.indexOf(state.searchSubCat) !== -1) {
                 const data = item

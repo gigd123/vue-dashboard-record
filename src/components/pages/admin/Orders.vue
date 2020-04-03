@@ -59,7 +59,6 @@ export default {
         vm.isLoading = false
         vm.orders = response.data.orders
         vm.pagination = response.data.pagination
-        console.log('json.response=====', response)
       })
     }
   },
